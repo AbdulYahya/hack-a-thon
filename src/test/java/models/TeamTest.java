@@ -53,6 +53,7 @@ public class TeamTest {
     @Test
     public void getStringName_getStringNameReturnsName_String() throws Exception {
         Team testTeam = setupTeam();
-        assertEquals("NeveBrokeAgain", testTeam.getStringName());
+        assertEquals("NeverBrokeAgain", testTeam.getStringName());
     }
+
 }
