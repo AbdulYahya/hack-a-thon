@@ -56,4 +56,9 @@ public class TeamTest {
         assertEquals("NeverBrokeAgain", testTeam.getStringName());
     }
 
+    @Test
+    public void getStringDescription_getStringDescriptionReturnsDesc_String() throws Exception {
+        Team testTeam = setupTeam();
+        assertEquals("Young NB", testTeam.getStringDescription());
+    }
 }
