@@ -41,4 +41,13 @@ public class TeamTest {
         assertTrue(Team.getAll().contains(testTeam));
         assertTrue(Team.getAll().contains(otherTestTeam));
     }
+
+    @Test
+    public void getAllMembers_getAllMembersReturnsMembersCorrectly_boolean() throws Exception {
+        Team testTeam = setupTeam();
+        Members testMember = new Members("Sam", "Wise", "Nothing", 20);
+//        testTeam.getAllMembers().add(testMember);
+        assertTrue(testTeam.getAllMembers().contains(testMember));
+
+    }
 }
