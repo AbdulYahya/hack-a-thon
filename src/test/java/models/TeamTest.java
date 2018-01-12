@@ -105,4 +105,11 @@ public class TeamTest {
         testTeam.setStringName("Young Test");
         assertEquals("Young Test", testTeam.getStringName());
     }
+
+    @Test
+    public void setStringDescription_setsNewStringDescription_string() throws Exception {
+        Team testTeam = setupTeam();
+        testTeam.setStringDescription("Nothing");
+        assertEquals("Nothin", testTeam.getStringDescription());
+    }
 }

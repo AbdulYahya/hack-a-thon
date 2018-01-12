@@ -54,4 +54,8 @@ public class Team {
     public void setStringName(String stringName) {
         this.stringName = stringName;
     }
+
+    public void setStringDescription(String stringDescription) {
+        this.stringDescription = stringDescription;
+    }
 }
