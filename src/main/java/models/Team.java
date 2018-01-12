@@ -8,15 +8,25 @@ public class Team {
     private List<Members> listMembers = new ArrayList<>(); // might have to initialize this list in the constructor
     private String stringName;
     private String stringDescription;
+    private int id;
 
     public Team(String stringName, String stringDescription) {
         this.stringName = stringName;
         this.stringDescription = stringDescription;
         listTeamInstance.add(this);
+        this.id = listTeamInstance.size();
     }
 
     public static void clearAllTeams() {
         listTeamInstance.clear();
+    }
+
+    public void deleteTeam() {
+        listTeamInstance.remove(id - 1);
+    }
+
+    public Team findById() {
+        return listTeamInstance.get(id - 1);
     }
 
     // Getter Methods
@@ -34,5 +44,9 @@ public class Team {
 
     public String getStringDescription() {
         return stringDescription;
+    }
+
+    public int getId() {
+        return id;
     }
 }

@@ -26,6 +26,22 @@ public class TeamTest {
         assertTrue(testTeam instanceof Team);
     }
 
+    @Test
+    public void clearAll_deletesAllTeams_boolean() throws Exception {
+        Team testTeam = setupTeam();
+        Team otherTestTeam = setupTeam();
+        Team.clearAllTeams();
+        assertEquals(1, Team.getAll().size());
+    }
+
+    @Test
+    public void deleteTeam_deletesASpecificTeam_boolean() throws Exception {
+        Team testTeam = setupTeam();
+        Team otherTestTeam = setupTeam();
+        testTeam.deleteTeam();
+        assertEquals(2, Team.getAll().size());
+        assertEquals(Team.getAll().get(0).getId(), 2);
+    }
     // Getter Methods
     @Test
     public void getAll_getAllReturnsTeamsCorrectly_boolean() throws Exception {
