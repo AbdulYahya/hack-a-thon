@@ -110,6 +110,6 @@ public class TeamTest {
     public void setStringDescription_setsNewStringDescription_string() throws Exception {
         Team testTeam = setupTeam();
         testTeam.setStringDescription("Nothing");
-        assertEquals("Nothin", testTeam.getStringDescription());
+        assertEquals("Nothing", testTeam.getStringDescription());
     }
 }
