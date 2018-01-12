@@ -2,10 +2,14 @@ package models;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class TeamTest {
+    public Team setupTeam() {
+        return new Team("NeverBrokeAgain", "Young NBA");
+    }
 
     @Before
     public void setUp() throws Exception {
@@ -13,5 +17,11 @@ public class TeamTest {
 
     @After
     public void tearDown() throws Exception {
+    }
+
+    @Test
+    public void newTeam_instantiatesCorrectly_boolean() throws Exception {
+        Team testTeam = setupTeam();
+        assertFalse(testTeam instanceof Team);
     }
 }

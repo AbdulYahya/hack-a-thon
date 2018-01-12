@@ -39,7 +39,7 @@ public class MembersTest {
         Members testMember = setupMember();
         Members otherTestMember = setupMember();
         assertTrue(Members.getAll().contains(testMember));
-        assertFalse(Members.getAll().contains(otherTestMember));
+        assertTrue(Members.getAll().contains(otherTestMember));
     }
 
     @Test
