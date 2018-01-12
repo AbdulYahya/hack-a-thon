@@ -22,6 +22,7 @@ public class MembersTest {
     @Test
     public void newMember_instantiatesCorrectly_boolean() throws Exception {
         Members testMember = setupMember();
-        assertFalse(testMember instanceof Members);
+        assertTrue(testMember instanceof Members);
     }
+
 }
