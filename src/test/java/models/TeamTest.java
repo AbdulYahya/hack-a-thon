@@ -22,6 +22,6 @@ public class TeamTest {
     @Test
     public void newTeam_instantiatesCorrectly_boolean() throws Exception {
         Team testTeam = setupTeam();
-        assertFalse(testTeam instanceof Team);
+        assertTrue(testTeam instanceof Team);
     }
 }
