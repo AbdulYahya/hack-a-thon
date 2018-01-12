@@ -71,6 +71,27 @@ public class MembersTest {
         Members.clearAllMembers(); // Works without. Will continue to test
         Members testMember = setupMember();
         assertEquals(1, testMember.getId());
+    }
 
+    // Setter Methods
+    @Test
+    public void setStringFirstName_setsNewStringFirstName_String() throws Exception {
+        Members testMember = setupMember();
+        testMember.setStringFirstName("Young");
+        assertEquals("Yung", testMember.getStringFirstName());
+    }
+
+    @Test
+    public void setStringLastName_setsNewStringLastName_String() throws Exception {
+        Members testMember = setupMember();
+        testMember.setStringLastName("NBA");
+        assertEquals("NB", testMember.getStringLastName());
+    }
+
+    @Test
+    public void setStringShortDesc_setsNewStringShortDesc_String() throws Exception {
+        Members testMember = setupMember();
+        testMember.setStringShortDesc("Never Broke Again");
+        assertEquals("Neve Broke Again", testMember.getStringShortDesc());
     }
 }
