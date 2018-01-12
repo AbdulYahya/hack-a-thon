@@ -17,7 +17,7 @@ public class TeamTest {
 
     @After
     public void tearDown() throws Exception {
-        Team.clearAllTeams();
+        Team.deleteAllTeams();
     }
 
     @Test
@@ -27,11 +27,11 @@ public class TeamTest {
     }
 
     @Test
-    public void clearAll_deletesAllTeams_boolean() throws Exception {
+    public void deleteAllTeams_deletesAllTeams_boolean() throws Exception {
         Team testTeam = setupTeam();
         Team otherTestTeam = setupTeam();
-        Team.clearAllTeams();
-        assertEquals(1, Team.getAll().size());
+        Team.deleteAllTeams();
+        assertEquals(0, Team.getAll().size());
     }
 
     @Test
@@ -39,7 +39,7 @@ public class TeamTest {
         Team testTeam = setupTeam();
         Team otherTestTeam = setupTeam();
         testTeam.deleteTeam();
-        assertEquals(2, Team.getAll().size());
+        assertEquals(1, Team.getAll().size());
         assertEquals(Team.getAll().get(0).getId(), 2);
     }
     // Getter Methods

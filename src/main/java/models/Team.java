@@ -17,7 +17,7 @@ public class Team {
         this.id = listTeamInstance.size();
     }
 
-    public static void clearAllTeams() {
+    public static void deleteAllTeams() {
         listTeamInstance.clear();
     }
 
