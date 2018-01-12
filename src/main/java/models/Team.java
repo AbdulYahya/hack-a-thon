@@ -20,11 +20,11 @@ public class Team {
     }
 
     // Getter Methods
-    public static List<Team> getAll() throws Exception {
+    public static List<Team> getAll() {
         return listTeamInstance;
     }
 
-    public List<Members> getAllMembers() throws Exception {
+    public List<Members> getAllMembers() {
         return listMembers;
     }
 
