@@ -78,20 +78,20 @@ public class MembersTest {
     public void setStringFirstName_setsNewStringFirstName_String() throws Exception {
         Members testMember = setupMember();
         testMember.setStringFirstName("Young");
-        assertEquals("Yung", testMember.getStringFirstName());
+        assertEquals("Young", testMember.getStringFirstName());
     }
 
     @Test
     public void setStringLastName_setsNewStringLastName_String() throws Exception {
         Members testMember = setupMember();
         testMember.setStringLastName("NBA");
-        assertEquals("NB", testMember.getStringLastName());
+        assertEquals("NBA", testMember.getStringLastName());
     }
 
     @Test
     public void setStringShortDesc_setsNewStringShortDesc_String() throws Exception {
         Members testMember = setupMember();
         testMember.setStringShortDesc("Never Broke Again");
-        assertEquals("Neve Broke Again", testMember.getStringShortDesc());
+        assertEquals("Never Broke Again", testMember.getStringShortDesc());
     }
 }
