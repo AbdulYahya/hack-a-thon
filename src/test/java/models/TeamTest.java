@@ -64,7 +64,7 @@ public class TeamTest {
         testTeam.getAllMembers().add(testMember);
         testTeam.getAllMembers().add(otherTestMember);
         assertTrue(testTeam.getAllMembers().contains(testMember));
-        assertFalse(testTeam.getAllMembers().contains(otherTestMember));
+        assertTrue(testTeam.getAllMembers().contains(otherTestMember));
     }
 
     // Getter Methods
