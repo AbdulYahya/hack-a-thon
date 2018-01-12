@@ -42,6 +42,20 @@ public class MembersTest {
         assertEquals(1, Members.getAll().size());
         assertEquals(Members.getAll().get(0).getId(), 2);
     }
+
+    @Test
+    public void findById_returnsCorrectMember_boolean() throws Exception {
+        Members testMember = setupMember();
+        assertEquals(0, Members.findById(testMember.getId()).getId());
+    }
+
+    @Test
+    public void findById_returnsCorrectTeamWhenMoreThanOneTeamExists_boolean() throws Exception {
+        Members testMember = setupMember();
+        Members otherTestMember = setupMember();
+        assertEquals(1, Members.findById(otherTestMember.getId()).getId());
+    }
+
     // Getter Methods
     @Test
     public void getAll_getAllReturnsMembersCorrectly_boolean() throws Exception {
