@@ -20,7 +20,7 @@ public class Members {
         this.id = listMemberInstance.size();
     }
 
-    public static void clearAllMembers() {
+    public static void deleteAllMembers() {
         listMemberInstance.clear();
     }
 

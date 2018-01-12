@@ -17,7 +17,7 @@ public class MembersTest {
 
     @After
     public void tearDown() throws Exception {
-        Members.clearAllMembers();
+        Members.deleteAllMembers();
     }
 
     @Test
@@ -26,6 +26,22 @@ public class MembersTest {
         assertTrue(testMember instanceof Members);
     }
 
+    @Test
+    public void deleteAllMembers_deletesAllMembers_boolean() throws Exception {
+        Members testMember = setupMember();
+        Members otherTestMember = setupMember();
+        Members.deleteAllMembers();
+        assertEquals(1, Members.getAll().size());
+    }
+
+    @Test
+    public void deleteMember_deletesASpecificMember_boolean() throws Exception {
+        Members testMember = setupMember();
+        Members otherTestMember = setupMember();
+        testMember.deleteMember();
+        assertEquals(1, Members.getAll().size());
+        assertEquals(Members.getAll().get(0).getId(), 3);
+    }
     // Getter Methods
     @Test
     public void getAll_getAllReturnsMembersCorrectly_boolean() throws Exception {
@@ -68,7 +84,7 @@ public class MembersTest {
 
     @Test
     public void getId_getIdReturnsMemberId_int() throws Exception {
-        Members.clearAllMembers(); // Works without. Will continue to test
+        Members.deleteAllMembers(); // Works without. Will continue to test
         Members testMember = setupMember();
         assertEquals(1, testMember.getId());
     }
