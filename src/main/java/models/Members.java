@@ -18,6 +18,10 @@ public class Members {
         listMemberInstance.add(this);
     }
 
+    public static void clearAllMembers() {
+        listMemberInstance.clear();
+    }
+
     // Getters
     public static List<Members> getAll() {
         return listMemberInstance;

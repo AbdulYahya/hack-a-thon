@@ -17,6 +17,7 @@ public class MembersTest {
 
     @After
     public void tearDown() throws Exception {
+        Members.clearAllMembers();
     }
 
     @Test
@@ -29,12 +30,24 @@ public class MembersTest {
     @Test
     public void getStringFirstName_instantiatesWithFirstName_boolean() throws Exception {
         Members testMember = setupMember();
-        assertEquals("Samwis", testMember.getStringFirstName());
+        assertEquals("Samwise", testMember.getStringFirstName());
     }
 
     @Test
     public void getStringLastName_instantiatesWithLastName_boolean() throws Exception {
         Members testMember = setupMember();
-        assertEquals("Gamge", testMember.getStringLastName());
+        assertEquals("Gamgee", testMember.getStringLastName());
+    }
+
+    @Test
+    public void getStringShortDesc_instantiatesWithShortDesc_boolean() throws Exception {
+        Members testMember = setupMember();
+        assertEquals("New membe", testMember.getStringShortDesc());
+    }
+
+    @Test
+    public void getIntAge_instantiatesWithAge_boolean() throws Exception {
+        Members testMember = setupMember();
+        assertEquals(19, testMember.getIntAge());
     }
 }
