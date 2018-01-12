@@ -49,7 +49,7 @@ public class App {
         });
         // get: show all teams
         get("/teams", (request, response) -> {
-           Map<String, Object> model = new HashMap<>();
+            Map<String, Object> model = new HashMap<>();
             List<Team> teams = Team.getAll();
             model.put("teams", teams);
            return new HandlebarsTemplateEngine().render(new ModelAndView(model, "teams.hbs"));
@@ -78,6 +78,9 @@ public class App {
             String teamName = request.queryParams("teamName");
             String teamDesc = request.queryParams("teamDesc");
             updateTeam.setStringName(teamName);
+            updateTeam.setStringDescription(teamDesc);
+            model.put("updateTeam", updateTeam);
+            response.redirect("/teams"); // After user submits form - redirect to /teams
             return new HandlebarsTemplateEngine().render(new ModelAndView(model, "team.hbs"));
         });
     }
