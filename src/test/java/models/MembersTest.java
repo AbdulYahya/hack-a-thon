@@ -31,7 +31,7 @@ public class MembersTest {
         Members testMember = setupMember();
         Members otherTestMember = setupMember();
         Members.deleteAllMembers();
-        assertEquals(1, Members.getAll().size());
+        assertEquals(0, Members.getAll().size());
     }
 
     @Test
@@ -40,7 +40,7 @@ public class MembersTest {
         Members otherTestMember = setupMember();
         testMember.deleteMember();
         assertEquals(1, Members.getAll().size());
-        assertEquals(Members.getAll().get(0).getId(), 3);
+        assertEquals(Members.getAll().get(0).getId(), 2);
     }
     // Getter Methods
     @Test
