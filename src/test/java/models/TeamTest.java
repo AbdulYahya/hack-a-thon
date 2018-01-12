@@ -82,6 +82,6 @@ public class TeamTest {
     public void getId_getIdReturnsTeamId_int() throws Exception {
         Team.deleteAllTeams(); // Works without this. will continue to test.
         Team testTeam = setupTeam();
-        assertEquals(0, testTeam.getId());
+        assertEquals(1, testTeam.getId());
     }
 }
