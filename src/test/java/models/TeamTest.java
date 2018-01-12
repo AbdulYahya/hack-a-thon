@@ -59,6 +59,6 @@ public class TeamTest {
     @Test
     public void getStringDescription_getStringDescriptionReturnsDesc_String() throws Exception {
         Team testTeam = setupTeam();
-        assertEquals("Young NB", testTeam.getStringDescription());
+        assertEquals("Young NBA", testTeam.getStringDescription());
     }
 }
