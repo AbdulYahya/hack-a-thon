@@ -70,7 +70,7 @@ public class MembersTest {
     public void getId_getIdReturnsMemberId_int() throws Exception {
         Members.clearAllMembers(); // Works without. Will continue to test
         Members testMember = setupMember();
-        assertEquals(0, testMember.getId());
+        assertEquals(1, testMember.getId());
 
     }
 }
