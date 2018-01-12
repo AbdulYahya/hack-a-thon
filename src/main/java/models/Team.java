@@ -49,4 +49,9 @@ public class Team {
     public int getId() {
         return id;
     }
+
+    // Setter Methods
+    public void setStringName(String stringName) {
+        this.stringName = stringName;
+    }
 }

@@ -1,5 +1,7 @@
 import models.*;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import spark.ModelAndView;
@@ -38,13 +40,45 @@ public class App {
         // post: process new team form
         post("/teams/new", (request, response) -> {
            Map<String, Object> model = new HashMap<>();
+           String teamName = request.queryParams("teamName");
+           String teamDesc = request.queryParams("teamDesc");
+           Team newTeam = new Team(teamName, teamDesc);
+           model.put("team", newTeam);
+           response.redirect("/teams"); // After user submits form - redirect to /teams
            return new HandlebarsTemplateEngine().render(new ModelAndView(model, "teams.hbs"));
         });
         // get: show all teams
         get("/teams", (request, response) -> {
            Map<String, Object> model = new HashMap<>();
+            List<Team> teams = Team.getAll();
+            model.put("teams", teams);
            return new HandlebarsTemplateEngine().render(new ModelAndView(model, "teams.hbs"));
         });
-
+        // get: show an individual team
+        get("/teams/:id", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            int teamId = Integer.parseInt(request.params("id"));
+            Team foundTeam = Team.findById(teamId);
+            model.put("team", foundTeam);
+            return new HandlebarsTemplateEngine().render(new ModelAndView(model, "team.hbs"));
+        });
+        // get: show a form to update a team
+        get("/teams/:id/update", (request, response) -> {
+           Map<String, Object> model = new HashMap<>();
+           int updateTeamId = Integer.parseInt(request.params("id"));
+           Team updateTeam = Team.findById(updateTeamId);
+           model.put("updateTeam", updateTeam);
+           return new HandlebarsTemplateEngine().render(new ModelAndView(model, "form.hbs"));
+        });
+        //  post: process a form to update a team
+        post("/teams/:id/update", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            int updateTeamId = Integer.parseInt(request.params("id"));
+            Team updateTeam = Team.findById(updateTeamId);
+            String teamName = request.queryParams("teamName");
+            String teamDesc = request.queryParams("teamDesc");
+            updateTeam.setStringName(teamName);
+            return new HandlebarsTemplateEngine().render(new ModelAndView(model, "team.hbs"));
+        });
     }
 }

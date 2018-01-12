@@ -98,4 +98,11 @@ public class TeamTest {
         Team testTeam = setupTeam();
         assertEquals(1, testTeam.getId());
     }
+
+    @Test
+    public void setStringName_setsNewStringName_string() throws Exception {
+        Team testTeam = setupTeam();
+        testTeam.setStringName("Young Test");
+        assertEquals("Yung Test", testTeam.getStringName());
+    }
 }
