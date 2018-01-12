@@ -15,6 +15,10 @@ public class Team {
         listTeamInstance.add(this);
     }
 
+    public static void clearAllTeams() {
+        listTeamInstance.clear();
+    }
+
     // Getter Methods
     public static List<Team> getAll() throws Exception {
         return listTeamInstance;
