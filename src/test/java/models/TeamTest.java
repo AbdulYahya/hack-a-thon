@@ -31,7 +31,7 @@ public class TeamTest {
     public void getAll_getAllReturnsTeamsCorrectly_boolean() throws Exception {
         Team testTeam = setupTeam();
         Team otherTestTeam = setupTeam();
-        assertEquals(3, Team.getAll().size());
+        assertEquals(2, Team.getAll().size());
     }
 
     @Test
@@ -39,6 +39,6 @@ public class TeamTest {
         Team testTeam = setupTeam();
         Team otherTestTeam = setupTeam();
         assertTrue(Team.getAll().contains(testTeam));
-        assertFalse(Team.getAll().contains(otherTestTeam));
+        assertTrue(Team.getAll().contains(otherTestTeam));
     }
 }
