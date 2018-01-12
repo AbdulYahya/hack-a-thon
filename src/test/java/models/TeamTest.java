@@ -103,6 +103,6 @@ public class TeamTest {
     public void setStringName_setsNewStringName_string() throws Exception {
         Team testTeam = setupTeam();
         testTeam.setStringName("Young Test");
-        assertEquals("Yung Test", testTeam.getStringName());
+        assertEquals("Young Test", testTeam.getStringName());
     }
 }
