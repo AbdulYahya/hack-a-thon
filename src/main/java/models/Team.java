@@ -25,7 +25,7 @@ public class Team {
         listTeamInstance.remove(id - 1);
     }
 
-    public Team findById() {
+    public static Team findById(int id) {
         return listTeamInstance.get(id - 1);
     }
 
