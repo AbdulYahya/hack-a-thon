@@ -48,6 +48,11 @@ public class TeamTest {
         Members testMember = new Members("Sam", "Wise", "Nothing", 20);
         testTeam.getAllMembers().add(testMember);
         assertTrue(testTeam.getAllMembers().contains(testMember));
+    }
 
+    @Test
+    public void getStringName_getStringNameReturnsName_String() throws Exception {
+        Team testTeam = setupTeam();
+        assertEquals("NeveBrokeAgain", testTeam.getStringName());
     }
 }
