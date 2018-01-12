@@ -25,4 +25,16 @@ public class MembersTest {
         assertTrue(testMember instanceof Members);
     }
 
+    // Getter Methods
+    @Test
+    public void getStringFirstName_instantiatesWithFirstName_boolean() throws Exception {
+        Members testMember = setupMember();
+        assertEquals("Samwis", testMember.getStringFirstName());
+    }
+
+    @Test
+    public void getStringLastName_instantiatesWithLastName_boolean() throws Exception {
+        Members testMember = setupMember();
+        assertEquals("Gamge", testMember.getStringLastName());
+    }
 }
