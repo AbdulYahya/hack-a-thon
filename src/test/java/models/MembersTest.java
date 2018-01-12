@@ -42,12 +42,12 @@ public class MembersTest {
     @Test
     public void getStringShortDesc_instantiatesWithShortDesc_boolean() throws Exception {
         Members testMember = setupMember();
-        assertEquals("New membe", testMember.getStringShortDesc());
+        assertEquals("New member", testMember.getStringShortDesc());
     }
 
     @Test
     public void getIntAge_instantiatesWithAge_boolean() throws Exception {
         Members testMember = setupMember();
-        assertEquals(19, testMember.getIntAge());
+        assertEquals(20, testMember.getIntAge());
     }
 }
