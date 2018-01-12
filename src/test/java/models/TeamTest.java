@@ -77,4 +77,11 @@ public class TeamTest {
         Team testTeam = setupTeam();
         assertEquals("Young NBA", testTeam.getStringDescription());
     }
+
+    @Test
+    public void getId_getIdReturnsTeamId_int() throws Exception {
+        Team.deleteAllTeams(); // Works without this. will continue to test.
+        Team testTeam = setupTeam();
+        assertEquals(0, testTeam.getId());
+    }
 }
