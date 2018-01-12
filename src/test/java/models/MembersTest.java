@@ -31,7 +31,15 @@ public class MembersTest {
     public void getAll_getAllReturnsMembersCorrectly_boolean() throws Exception {
         Members testMember = setupMember();
         Members otherTestMember = setupMember();
-        assertEquals(1, Members.getAll().size());
+        assertEquals(2, Members.getAll().size());
+    }
+
+    @Test
+    public void getAll_getAllContainsAllMembers_boolean() throws Exception {
+        Members testMember = setupMember();
+        Members otherTestMember = setupMember();
+        assertTrue(Members.getAll().contains(testMember));
+        assertFalse(Members.getAll().contains(otherTestMember));
     }
 
     @Test
