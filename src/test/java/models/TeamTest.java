@@ -56,6 +56,17 @@ public class TeamTest {
         assertEquals(2, Team.findById(otherTestTeam.getId()).getId());
     }
 
+    @Test
+    public void findById_returnsCorrectTeamMember_boolean() throws Exception {
+        Team testTeam = setupTeam();
+        Members testMember = new Members("Samwise", "Gamgee", "Testing", 20);
+        Members otherTestMember = new Members("Samwise2", "Gamgee2", "Testing2", 20);
+        testTeam.getAllMembers().add(testMember);
+        testTeam.getAllMembers().add(otherTestMember);
+        assertTrue(testTeam.getAllMembers().contains(testMember));
+        assertFalse(testTeam.getAllMembers().contains(otherTestMember));
+    }
+
     // Getter Methods
     @Test
     public void getAll_getAllReturnsTeamsCorrectly_boolean() throws Exception {
