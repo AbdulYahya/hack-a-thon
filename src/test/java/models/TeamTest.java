@@ -46,14 +46,14 @@ public class TeamTest {
     @Test
     public void findById_returnsCorrectTeam_boolean() throws Exception {
         Team testTeam = setupTeam();
-        assertEquals(2, Team.findById(testTeam.getId()).getId());
+        assertEquals(1, Team.findById(testTeam.getId()).getId());
     }
 
     @Test
     public void findById_returnsCorrectTeamWhenMoreThanOneTeamExists_boolean() throws Exception {
         Team testTeam = setupTeam();
         Team otherTestTeam = setupTeam();
-        assertEquals(3, Team.findById(otherTestTeam.getId()).getId());
+        assertEquals(2, Team.findById(otherTestTeam.getId()).getId());
     }
 
     // Getter Methods
