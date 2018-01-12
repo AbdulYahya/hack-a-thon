@@ -28,6 +28,13 @@ public class MembersTest {
 
     // Getter Methods
     @Test
+    public void getAll_getAllReturnsMembersCorrectly_boolean() throws Exception {
+        Members testMember = setupMember();
+        Members otherTestMember = setupMember();
+        assertEquals(1, Members.getAll().size());
+    }
+
+    @Test
     public void getStringFirstName_instantiatesWithFirstName_boolean() throws Exception {
         Members testMember = setupMember();
         assertEquals("Samwise", testMember.getStringFirstName());
