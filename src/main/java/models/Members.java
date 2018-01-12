@@ -9,6 +9,7 @@ public class Members {
     private String stringLastName;
     private String stringShortDesc;
     private int intAge;
+    private int id;
 
     public Members(String stringFirstName, String stringLastName, String stringShortDesc, int intAge) {
         this.stringFirstName = stringFirstName;
@@ -16,11 +17,16 @@ public class Members {
         this.stringShortDesc = stringShortDesc;
         this.intAge = intAge;
         listMemberInstance.add(this);
+        this.id = listMemberInstance.size();
     }
 
     public static void clearAllMembers() {
         listMemberInstance.clear();
     }
+
+    public void deleteMember() { listMemberInstance.remove(id - 1); }
+
+    public static Members findById(int id) { return listMemberInstance.get(id - 1); }
 
     // Getters
     public static List<Members> getAll() {
@@ -43,4 +49,18 @@ public class Members {
         return intAge;
     }
 
+    public int getId() { return id; }
+
+    // Setters
+    public void setStringFirstName(String stringFirstName) {
+        this.stringFirstName = stringFirstName;
+    }
+
+    public void setStringLastName(String stringLastName) {
+        this.stringLastName = stringLastName;
+    }
+
+    public void setStringShortDesc(String stringShortDesc) {
+        this.stringShortDesc = stringShortDesc;
+    }
 }

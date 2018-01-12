@@ -65,4 +65,12 @@ public class MembersTest {
         Members testMember = setupMember();
         assertEquals(20, testMember.getIntAge());
     }
+
+    @Test
+    public void getId_getIdReturnsMemberId_int() throws Exception {
+        Members.clearAllMembers(); // Works without. Will continue to test
+        Members testMember = setupMember();
+        assertEquals(0, testMember.getId());
+
+    }
 }
