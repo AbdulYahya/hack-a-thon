@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class TeamTest {
-    public Team setupTeam() {
+    private Team setupTeam() {
         return new Team("NeverBrokeAgain", "Young NBA");
     }
 

@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class MembersTest {
-    public Members setupMember() {
+    private Members setupMember() {
         return new Members("Samwise", "Gamgee", "New member", 20);
     }
 
