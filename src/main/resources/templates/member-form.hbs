@@ -1,0 +1,93 @@
+{{#partial "header"}}
+  <nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="/">
+      <img src="/assets/images/brand.svg" width="50" height="30" class="d-inline-block align-top" alt="SVG Brand">
+      <span class="pl-2">Hack-A-Thon</span>
+    </a>
+
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="/teams">Teams</a>
+      </li>
+    </ul>
+  </nav>
+{{/partial}}
+
+{{#partial "main"}}
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+          <div class="card">
+            <div class="card-body">
+              <form action="/teams/members/new" method="post">
+                <h4 class="card-title">Member</h4>
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="firstName-addon">First</span>
+                      </div>
+                      <input type="text" id="memberFirstName" name="memberFirstName"  class="form-control" placeholder="First Name e.g., NBA" aria-label="First Name e.g., NBA" aria-describedby="firstName-addon">
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="lastName-addon">Last</span>
+                      </div>
+                      <input type="text" id="memberLastName" name="memberLastName"  class="form-control" placeholder="Last Name e.g., NBA" aria-label="Last Name e.g., NBA" aria-describedby="lastName-addon">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-4">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="age-addon">Age</span>
+                      </div>
+                      <input type="number" id="memberAge" name="memberAge" class="form-control" placeholder="Age e.g., 23" aria-label="Age e.g., 23" aria-describedby="age-addon">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="memberDesc-addon">Description</span>
+                    </div>
+                    <input type="text" id="memberShortDesc" name="memberShortDesc" class="form-control" placeholder="Short Member Description..." aria-label="Short Member Description..." aria-describedby="memberDesc-addon">
+                  </div>
+                </div>
+
+                <hr />
+                <h4 class="card-title">Add Another Member?</h4>
+                <small id="addMembersHelp" class="form-text text-muted">You can always add members later on from your team's control panel</small>
+                <div class="form-group">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="yes">
+                    <label class="form-check-label" for="inlineRadio1">Yes</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="no">
+                    <label class="form-check-label" for="inlineRadio2">No</label>
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-info">Add Member</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-3"></div>
+      </div>
+    </div>
+  </div>
+{{/partial}}
+
+{{> layout.hbs}}

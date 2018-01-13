@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Team {
     private static List<Team> listTeamInstance = new ArrayList<>();
-    private List<Members> listMembers = new ArrayList<>(); // might have to initialize this list in the constructor
+    private static List<Members> listMembers; // might have to initialize this list in the constructor
     private String stringName;
     private String stringDescription;
     private int id;
@@ -13,8 +13,10 @@ public class Team {
     public Team(String stringName, String stringDescription) {
         this.stringName = stringName;
         this.stringDescription = stringDescription;
+        listMembers = new ArrayList<>();
         listTeamInstance.add(this);
         this.id = listTeamInstance.size();
+
     }
 
     public static void deleteAllTeams() {
@@ -34,7 +36,7 @@ public class Team {
         return listTeamInstance;
     }
 
-    public List<Members> getAllMembers() {
+    public static List<Members> getAllMembers() {
         return listMembers;
     }
 
