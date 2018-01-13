@@ -130,7 +130,7 @@ public class TeamTest {
         Team testTeam = setupTeam();
         Members member = new Members("Samwise", "Gamgee", "Nothing", 22);
         testTeam.addMember(member);
-        assertFalse(testTeam.getAllMembers().contains(member));
+        assertTrue(testTeam.getAllMembers().contains(member));
 
     }
 }
