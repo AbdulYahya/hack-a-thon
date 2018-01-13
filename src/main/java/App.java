@@ -67,7 +67,7 @@ public class App {
             String addMember = request.queryParams("inlineRadioOptions");
             int age = Integer.parseInt(request.queryParams("memberAge"));
             Members members = new Members(firstName, lastName, shortDesc, age);
-            Team.getAllMembers().add(members);
+//            Team.getAllMembers().add(members);
 
             if(addMember.equals("yes")) {
                 response.redirect("/teams/members/new"); // After user submits form - redirect to /teams

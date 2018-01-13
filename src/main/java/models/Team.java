@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Team {
     private static List<Team> listTeamInstance = new ArrayList<>();
-    private static List<Members> listMembers; // might have to initialize this list in the constructor
+    private List<Members> listMembers; // might have to initialize this list in the constructor
     private String stringName;
     private String stringDescription;
     private int id;
@@ -36,7 +36,7 @@ public class Team {
         return listTeamInstance;
     }
 
-    public static List<Members> getAllMembers() {
+    public List<Members> getAllMembers() {
         return listMembers;
     }
 
@@ -59,5 +59,9 @@ public class Team {
 
     public void setStringDescription(String stringDescription) {
         this.stringDescription = stringDescription;
+    }
+
+    public void addMember(Members member) {
+        listMembers.add(member);
     }
 }
