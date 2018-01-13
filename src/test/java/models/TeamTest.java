@@ -87,8 +87,8 @@ public class TeamTest {
     public void getAllMembers_getAllMembersReturnsMembersCorrectly_boolean() throws Exception {
         Team testTeam = setupTeam();
         Members testMember = new Members("Sam", "Wise", "Nothing", 20);
-        Team.getAllMembers().add(testMember);
-        assertTrue(Team.getAllMembers().contains(testMember));
+        testTeam.getAllMembers().add(testMember);
+        assertTrue(testTeam.getAllMembers().contains(testMember));
     }
 
     @Test
@@ -110,6 +110,7 @@ public class TeamTest {
         assertEquals(1, testTeam.getId());
     }
 
+    // Setter Methods
     @Test
     public void setStringName_setsNewStringName_string() throws Exception {
         Team testTeam = setupTeam();
@@ -122,5 +123,14 @@ public class TeamTest {
         Team testTeam = setupTeam();
         testTeam.setStringDescription("Nothing");
         assertEquals("Nothing", testTeam.getStringDescription());
+    }
+
+    @Test
+    public void addMember_addsNewMember_List() throws Exception {
+        Team testTeam = setupTeam();
+        Members member = new Members("Samwise", "Gamgee", "Nothing", 22);
+        testTeam.addMember(member);
+        assertFalse(testTeam.getAllMembers().contains(member));
+
     }
 }
