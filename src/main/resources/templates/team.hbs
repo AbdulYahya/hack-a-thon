@@ -7,7 +7,7 @@
             <div class="col">
               <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                  <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-teamName" role="tab" aria-controls="nav-teamName" aria-selected="true">{{team.stringName}}</a>
+                  <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-teamName" role="tab" aria-controls="nav-teamName" aria-selected="true">{{ team.stringName }}</a>
                   <a class="nav-item nav-link" id="nav-members-tab" data-toggle="tab" href="#nav-members" role="tab" aria-controls="nav-members" aria-selected="false">Members</a>
                   <a class="nav-item nav-link" id="nav-settings-tab" data-toggle="tab" href="#nav-settings" role="tab" aria-controls="nav-settings" aria-selected="false">Settings</a>
                 </div>
@@ -40,7 +40,7 @@
                       <h4 class="card-title">Settings</h4>
                       <div class="row">
                         <div class="col-8">
-                          <form action="/teams/{{teams.id}}/update" method="post">
+                          <form action="/teams/{{team.id}}/update" method="post">
                             <div class="form-group">
                               <div class="input-group mb-3">
                                 <div class="input-group-prepend">
