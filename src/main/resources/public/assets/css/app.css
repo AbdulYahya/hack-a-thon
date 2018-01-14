@@ -21,6 +21,16 @@ h4 {
     background-size: contain;
     opacity: 0.5;
 }
+.team-member {
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
+
+a.btn-sm {
+    padding: .5rem .5rem !important;
+    font-size: 1rem !important;
+}
 
 .header,
 .marketing,
