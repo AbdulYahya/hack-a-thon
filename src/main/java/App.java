@@ -1,7 +1,6 @@
 import models.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import spark.ModelAndView;
@@ -79,7 +78,9 @@ public class App {
         get("/teams/:id", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             int teamId = Integer.parseInt(request.params("id"));
-            model.put("team", Team.findById(teamId));
+            Team team = Team.findById(teamId);
+            model.put("team", team);
+            model.put("members", team.getAllMembers());
             return new HandlebarsTemplateEngine().render(new ModelAndView(model, "team.hbs"));
         });
         // get: show a form to update a team

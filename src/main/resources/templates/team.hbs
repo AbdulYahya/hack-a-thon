@@ -7,7 +7,7 @@
             <div class="col">
               <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                  <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-teamName" role="tab" aria-controls="nav-teamName" aria-selected="true">{{ team.stringName }}</a>
+                  <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-teamName" role="tab" aria-controls="nav-teamName" aria-selected="true">Statistics</a>
                   <a class="nav-item nav-link" id="nav-members-tab" data-toggle="tab" href="#nav-members" role="tab" aria-controls="nav-members" aria-selected="false">Members</a>
                   <a class="nav-item nav-link" id="nav-settings-tab" data-toggle="tab" href="#nav-settings" role="tab" aria-controls="nav-settings" aria-selected="false">Settings</a>
                 </div>
@@ -16,7 +16,29 @@
                 <div class="tab-pane fade show active" id="nav-teamName" role="tabpanel" aria-labelledby="nav-home-tab">
                   <div class="card card-team">
                     <div class="card-body">
-                      <h4 class="card-title">Team Profile</h4>
+                      <!--<h4 class="card-title">Statistics</h4>-->
+                      <div class="row">
+                        <div class="col">
+                          <table class="table">
+                            <thead class="thead-light">
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Team Size</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row">{{ team.id }}</th>
+                                <td>{{ team.stringName }}</td>
+                                <td>{{ team.stringDescription }}</td>
+                                <td>{{ team.teamSize }}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
