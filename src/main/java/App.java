@@ -99,8 +99,9 @@ public class App {
             String teamDesc = request.queryParams("teamDesc");
             updateTeam.setStringName(teamName);
             updateTeam.setStringDescription(teamDesc);
-            model.put("teams", Team.getAll());
-            return new HandlebarsTemplateEngine().render(new ModelAndView(model, "teams.hbs"));
+            model.put("team", updateTeam);
+            model.put("members", updateTeam.getAllMembers());
+            return new HandlebarsTemplateEngine().render(new ModelAndView(model, "team.hbs"));
         });
     }
 }
