@@ -16,6 +16,11 @@ h4 {
 .card-team {
     border-top: none;
 }
+.feature-not-yet-avail {
+    background: url("/assets/images/coming-soon.png") no-repeat center;
+    background-size: contain;
+    opacity: 0.5;
+}
 
 .header,
 .marketing,
