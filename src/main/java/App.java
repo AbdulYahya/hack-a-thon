@@ -42,42 +42,39 @@ public class App {
            Map<String, Object> model = new HashMap<>();
            String teamName = request.queryParams("teamName");
            String teamDesc = request.queryParams("teamDesc");
-           String addMembers = request.queryParams("inlineRadioOptions");
-           Team newTeam = new Team(teamName, teamDesc);
-           model.put("team", newTeam);
+           new Team(teamName, teamDesc);
+           List<Team> teams = Team.getAll();
+           model.put("teams", teams);
 
-           if(addMembers.equals("yes")) {
-               response.redirect("/teams/members/new"); // After user submits form - redirect to /teams
-           } else {
-               response.redirect("/teams"); // After user submits form - redirect to /teams
-           }
            return new HandlebarsTemplateEngine().render(new ModelAndView(model, "teams.hbs"));
         });
         // get: show new member form
-        get("/teams/members/new", (request, response) -> {
+        get("/teams/:id/member/new", (request, response) -> {
            Map<String, Object> model = new HashMap<>();
+           int teamId = Integer.parseInt(request.params("id"));
+           Team team = Team.findById(teamId);
+           model.put("team", team);
            return new HandlebarsTemplateEngine().render(new ModelAndView(model, "member-form.hbs"));
         });
         // post: process new member form
-        post("/teams/members/new", (request, response) -> {
+        post("/teams/:id/member/new", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
+            int teamId = Integer.parseInt(request.params("id"));
+            Team team = Team.findById(teamId);
             String firstName = request.queryParams("memberFirstName");
             String lastName = request.queryParams("memberLastName");
             String shortDesc = request.queryParams("memberShortDesc");
-            String addMember = request.queryParams("inlineRadioOptions");
+//            String addMember = request.queryParams("inlineRadioOptions");
             int age = Integer.parseInt(request.queryParams("memberAge"));
-            Members members = new Members(firstName, lastName, shortDesc, age);
-//            Team.getAllMembers().add(members);
-
-            if(addMember.equals("yes")) {
-                response.redirect("/teams/members/new"); // After user submits form - redirect to /teams
-            }
-            return new HandlebarsTemplateEngine().render(new ModelAndView(model, "teams.hbs"));
+            Members member = new Members(firstName, lastName, shortDesc, age);
+            team.addMember(member);
+            return new HandlebarsTemplateEngine().render(new ModelAndView(model, "member-success.hbs"));
         });
         // get: show all teams
         get("/teams", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             List<Team> teams = Team.getAll();
+
             model.put("teams", teams);
            return new HandlebarsTemplateEngine().render(new ModelAndView(model, "teams.hbs"));
         });
@@ -85,11 +82,10 @@ public class App {
         get("/teams/:id", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             int teamId = Integer.parseInt(request.params("id"));
-            int memberId = Integer.parseInt(request.params("id"));
             Team foundTeam = Team.findById(teamId);
-            Members foundMember = Members.findById(memberId);
+            List<Members> members =  foundTeam.getAllMembers();
             model.put("team", foundTeam);
-            model.put("members", foundMember);
+            model.put("members", members);
             return new HandlebarsTemplateEngine().render(new ModelAndView(model, "team.hbs"));
         });
         // get: show a form to update a team
@@ -109,7 +105,6 @@ public class App {
             String teamDesc = request.queryParams("teamDesc");
             updateTeam.setStringName(teamName);
             updateTeam.setStringDescription(teamDesc);
-            model.put("updateTeam", updateTeam);
             response.redirect("/teams"); // After user submits form - redirect to /teams
             return new HandlebarsTemplateEngine().render(new ModelAndView(model, "team.hbs"));
         });
