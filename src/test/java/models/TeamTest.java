@@ -119,8 +119,10 @@ public class TeamTest {
         Team testTeam = setupTeam();
         Members testMember = dummyMember();
         Members otherTestMember = dummyMember();
+        Members otherOtherTestMember = dummyMember();
         testTeam.addMember(testMember);
         testTeam.addMember(otherTestMember);
+        testTeam.addMember(otherOtherTestMember);
         assertEquals(3, testTeam.getTeamSize());
     }
 
