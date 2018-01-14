@@ -34,7 +34,6 @@
                 <div class="tab-pane fade show active" id="nav-teamName" role="tabpanel" aria-labelledby="nav-home-tab">
                   <div class="card card-team">
                     <div class="card-body">
-                      <!--<h4 class="card-title">Statistics</h4>-->
                       <div class="row">
                         <div class="col">
                           <table class="table">
@@ -69,8 +68,8 @@
                   <div class="card card-team">
                     <div class="card-body">
                       <h4 class="card-title">Team Members</h4>
-                      {{#if members}}
-                        {{#each members}}
+                      {{#if members }}
+                        {{#each members }}
                           GetAllMembers
                           {{ stringFirstName }}
                         {{/each}}
@@ -93,13 +92,13 @@
                       <h4 class="card-title">Settings</h4>
                       <div class="row">
                         <div class="col-8">
-                          <form action="/teams/{{team.id}}/update" method="post">
+                          <form action="/teams/{{ team.id }}/update" method="post">
                             <div class="form-group">
                               <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                   <span class="input-group-text" id="teamName-addon">Team Name</span>
                                 </div>
-                                <input type="text" id="teamName" name="teamName"  class="form-control" value="{{team.stringName}}" aria-label="Team Name" aria-describedby="teamName-addon">
+                                <input type="text" id="teamName" name="teamName"  class="form-control" value="{{ team.stringName }}" aria-label="Team Name" aria-describedby="teamName-addon">
                               </div>
                             </div>
                             <div class="form-group">
@@ -107,7 +106,7 @@
                                 <div class="input-group-prepend">
                                   <span class="input-group-text" id="teamDesc-addon">Team Description</span>
                                 </div>
-                                <input type="text" id="teamDesc" name="teamDesc" class="form-control" value="{{team.stringDescription}}" aria-label="Team Description" aria-describedby="teamDesc-addon">
+                                <input type="text" id="teamDesc" name="teamDesc" class="form-control" value="{{ team.stringDescription }}" aria-label="Team Description" aria-describedby="teamDesc-addon">
                               </div>
                             </div>
                             <button type="submit" class="btn btn-info">Update Settings</button>
@@ -136,7 +135,7 @@
     $('#addDesc').click(function() {
         $('#nav-settings-tab').tab('show');
         setTimeout(function(){
-          window.location.href = "/teams/{{team.id}}#teamDesc";
+          window.location.href = "/teams/{{ team.id }}#teamDesc";
         }, 500);
     });
   </script>
