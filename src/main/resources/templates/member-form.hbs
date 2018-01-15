@@ -24,7 +24,7 @@
         <div class="col-6">
           <div class="card">
             <div class="card-body">
-              <form action="/teams/{{team.id}}/member/new" method="post">
+              <form id="addMemberForm" action="/teams/{{team.id}}/member/new" method="post" novalidate>
                 <h4 class="card-title">Member</h4>
                 <div class="row">
                   <div class="col">
@@ -32,7 +32,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text" id="firstName-addon">First</span>
                       </div>
-                      <input type="text" id="memberFirstName" name="memberFirstName"  class="form-control" placeholder="First Name e.g., NBA" aria-label="First Name e.g., NBA" aria-describedby="firstName-addon">
+                      <input type="text" id="memberFirstName" name="memberFirstName"  class="form-control" placeholder="First Name e.g., NBA" aria-label="First Name e.g., NBA" aria-describedby="firstName-addon" required>
                     </div>
                   </div>
 
@@ -41,7 +41,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text" id="lastName-addon">Last</span>
                       </div>
-                      <input type="text" id="memberLastName" name="memberLastName"  class="form-control" placeholder="Last Name e.g., NBA" aria-label="Last Name e.g., NBA" aria-describedby="lastName-addon">
+                      <input type="text" id="memberLastName" name="memberLastName"  class="form-control" placeholder="Last Name e.g., NBA" aria-label="Last Name e.g., NBA" aria-describedby="lastName-addon" required>
                     </div>
                   </div>
                 </div>
@@ -51,7 +51,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text" id="age-addon">Age</span>
                       </div>
-                      <input type="number" id="memberAge" name="memberAge" class="form-control" placeholder="Age e.g., 23" aria-label="Age e.g., 23" aria-describedby="age-addon">
+                      <input type="number" id="memberAge" name="memberAge" class="form-control" placeholder="Age e.g., 23" aria-label="Age e.g., 23" aria-describedby="age-addon" required>
                     </div>
                   </div>
                 </div>
@@ -89,6 +89,24 @@
       </div>
     </div>
   </div>
+{{/partial}}
+
+{{#partial "scripts"}}
+  <script>
+      (function() {
+          'use strict';
+          window.addEventListener('load', function() {
+              var form = document.getElementById('addMemberForm');
+              form.addEventListener('submit', function(event) {
+                  if (form.checkValidity() === false) {
+                      event.preventDefault();
+                      event.stopPropagation();
+                  }
+                  form.classList.add('was-validated');
+              }, false);
+          }, false);
+      })();
+  </script>
 {{/partial}}
 
 {{> layout.hbs}}

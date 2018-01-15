@@ -32,6 +32,18 @@ a.btn-sm {
     font-size: 1rem !important;
 }
 
+.btn-member {
+    padding: .30rem .30rem ;
+    font-size: 1rem;
+}
+#addDesc {
+    cursor: pointer;
+}
+
+#addDesc:hover {
+    color: red;
+}
+
 .header,
 .marketing,
 .footer {

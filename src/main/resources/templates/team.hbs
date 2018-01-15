@@ -25,7 +25,7 @@
             <div class="col">
               <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                  <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-teamName" role="tab" aria-controls="nav-teamName" aria-selected="true">Statistics</a>
+                  <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-teamName" role="tab" aria-controls="nav-teamName" aria-selected="true">Profile</a>
                   <a class="nav-item nav-link" id="nav-members-tab" data-toggle="tab" href="#nav-members" role="tab" aria-controls="nav-members" aria-selected="false">Members</a>
                   <a class="nav-item nav-link" id="nav-settings-tab" data-toggle="tab" href="#nav-settings" role="tab" aria-controls="nav-settings" aria-selected="false">Settings</a>
                 </div>
@@ -34,6 +34,7 @@
                 <div class="tab-pane fade show active" id="nav-teamName" role="tabpanel" aria-labelledby="nav-home-tab">
                   <div class="card card-team">
                     <div class="card-body">
+                      <h4 class="card-title">Team Statistics</h4>
                       <div class="row">
                         <div class="col">
                           <table class="table">
@@ -43,19 +44,23 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Description</th>
                                 <th scope="col">Team Size</th>
+                                <th scope="col"></th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr>
-                                <th scope="row">{{ team.id }}</th>
-                                <td>{{ team.stringName }}</td>
-                                <td>
+                                <th scope="row" class="align-middle">{{ team.id }}</th>
+                                <td class="align-middle">{{ team.stringName }}</td>
+                                <td class="align-middle">
                                   {{#unless team.stringDescription }}
-                                    <a id="addDesc" class="btn btn-info">Add Description</a>
+                                    <small id="addDesc" class="form-text text-muted">Edit team to add a description or click on this text.</small>
                                   {{/unless}}
                                   {{ team.stringDescription }}
                                 </td>
-                                <td>{{ team.teamSize }}</td>
+                                <td class="align-middle">{{ team.teamSize }}</td>
+                                <td class="align-middle">
+                                  <a id="editTeam" href="" class="btn btn-info btn-sm">edit</a>
+                                </td>
                               </tr>
                             </tbody>
                           </table>
@@ -67,17 +72,56 @@
                 <div class="tab-pane fade" id="nav-members" role="tabpanel" aria-labelledby="nav-members-tab">
                   <div class="card card-team">
                     <div class="card-body">
-                      <h4 class="card-title">Team Members</h4>
+                      <div class="row mb-4">
+                        <div class="col-4">
+                          <h4 class="card-title">Team Members</h4>
+                        </div>
+                        <div class="col-4"></div>
+                        <div class="col-4">
+                          <a class="btn btn-secondary btn-member float-right" href="/teams/{{ team.id }}/member/new" role="button">
+                            <img src="/assets/images/add-user.svg" width="25" height="20">
+                          </a>
+                        </div>
+                      </div>
                       {{#if members }}
-                        {{#each members }}
-                          GetAllMembers
-                          {{ stringFirstName }}
-                        {{/each}}
+                        <div class="table-responsive">
+                          <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">First</th>
+                                <th scope="col">Last</th>
+                                <th scope="col">Age</th>
+                                <th scope="col">Description</th>
+                                <th scope="col"></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {{#each members }}
+                                <tr>
+                                  <th scope="row" class="align-middle">{{ id }}</th>
+                                  <td class="align-middle">{{ stringFirstName }}</td>
+                                  <td class="align-middle">{{ stringLastName }}</td>
+                                  <td class="align-middle">{{ intAge }}</td>
+                                  <td class="align-middle">
+                                    {{#unless team.stringDescription }}
+                                      <small id="descMissing" class="form-text text-muted">Edit member to add a description.</small>
+                                    {{/unless}}
+                                    {{ stringShortDesc }}
+                                  </td>
+                                  <td class="align-middle">
+                                    <a href="" class="btn btn-info btn-sm">view</a>
+                                    <a href="" class="btn btn-info btn-sm">edit</a>
+                                  </td>
+                                </tr>
+                              {{/each}}
+                            </tbody>
+                          </table>
+                        </div>
                       {{else}}
                         <div class="jumbotron">
                           <h1 class="team-member">No Members yet</h1>
                           <p class="lead">Please add a member.</p>
-                          <a class="btn btn-info btn-sm" href="/teams/{{ team.id }}/member/new" role="button">+Team Member</a>
                         </div>
                       {{/if}}
                     </div>
@@ -128,15 +172,22 @@
 {{/partial}}
 
 {{#partial "scripts"}}
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
   <script>
-    $('#addDesc').click(function() {
-        $('#nav-settings-tab').tab('show');
-        setTimeout(function(){
-          window.location.href = "/teams/{{ team.id }}#teamDesc";
-        }, 500);
+    $(function () {
+        'use strict';
+
+        $('[data-toggle="tooltip"]').tooltip();
+
+        $('#addDesc').click(function() {
+            $('#nav-settings-tab').tab('show');
+            setTimeout(function(){
+                window.location.href = "/teams/{{ team.id }}#teamDesc";
+            }, 500);
+        });
+
+        $('#editTeam').click(function() {
+            $('#nav-settings-tab').tab('show');
+        });
     });
   </script>
 {{/partial}}
