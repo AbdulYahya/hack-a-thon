@@ -40,10 +40,6 @@ a.btn-sm {
     cursor: pointer;
 }
 
-#addDesc:hover {
-    color: red;
-}
-
 .header,
 .marketing,
 .footer {
