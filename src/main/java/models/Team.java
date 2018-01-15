@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Team {
     private static List<Team> listTeamInstance = new ArrayList<>();
-    private List<Members> listMembers = new ArrayList<>(); // might have to initialize this list in the constructor
+    private List<Members> listMembers = new ArrayList<>();
     private String stringName;
     private String stringDescription;
     private int id;

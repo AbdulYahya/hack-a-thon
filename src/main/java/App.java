@@ -46,14 +46,14 @@ public class App {
            return new HandlebarsTemplateEngine().render(new ModelAndView(model, "teams.hbs"));
         });
         // get: show new member form
-        get("/teams/:id/member/new", (request, response) -> {
+        get("/teams/:id/m/new", (request, response) -> {
            Map<String, Object> model = new HashMap<>();
            int teamId = Integer.parseInt(request.params("id"));
            model.put("team", Team.findById(teamId));
            return new HandlebarsTemplateEngine().render(new ModelAndView(model, "member-form.hbs"));
         });
         // post: process new member form
-        post("/teams/:id/member/new", (request, response) -> {
+        post("/teams/:id/m/new", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             int teamId = Integer.parseInt(request.params("id"));
             Team team = Team.findById(teamId);
@@ -82,6 +82,15 @@ public class App {
             model.put("team", team);
             model.put("members", team.getAllMembers());
             return new HandlebarsTemplateEngine().render(new ModelAndView(model, "team.hbs"));
+        });
+        // get: show an individual member
+        get("/teams/:id/m/:userId", (request, response) -> {
+           Map<String, Object> model = new HashMap<>();
+           int teamId = Integer.parseInt(request.params("id"));
+           int userId = Integer.parseInt(request.params("userId").substring(2));
+           model.put("team", Team.findById(teamId));
+           model.put("member", Members.findById(userId));
+           return new HandlebarsTemplateEngine().render(new ModelAndView(model, "member.hbs"));
         });
         // get: show a form to update a team
         get("/teams/:id/update", (request, response) -> {

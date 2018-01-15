@@ -103,9 +103,14 @@ public class MembersTest {
         assertEquals(1, testMember.getId());
     }
 
+    @Test
+    public void getMemberInitials_getsMemberInitials_String() throws Exception {
+        Members testMember = setupMember();
+        assertEquals("SG", testMember.getStringBuilderMemberInitials().toString());
+    }
     // Setter Methods
     @Test
-    public void setStringFirstName_setsNewStringFirstName_String() throws Exception {
+    public void setStringFirstName_setsNewringFirstName_String() throws Exception {
         Members testMember = setupMember();
         testMember.setStringFirstName("Young");
         assertEquals("Young", testMember.getStringFirstName());
