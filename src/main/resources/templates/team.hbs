@@ -57,9 +57,15 @@
                                   {{/unless}}
                                   {{ team.stringDescription }}
                                 </td>
-                                <td class="align-middle">{{ team.teamSize }}</td>
                                 <td class="align-middle">
-                                  <button id="editTeam" class="btn btn-info btn-sm">edit</button>
+                                  {{#if team.teamSize }}
+                                    {{ team.teamSize }}
+                                  {{else}}
+                                    <small id="addMem" class="form-text text-warning">Empty team! Click here to add a member</small>
+                                  {{/if}}
+                                </td>
+                                <td class="align-middle">
+                                  <button id="editTeam" class="btn btn-info btn-team">edit</button>
                                 </td>
                               </tr>
                             </tbody>
@@ -84,7 +90,7 @@
                         </div>
                         <div class="col-4"></div>
                         <div class="col-4">
-                          <a class="btn btn-secondary btn-member float-right" href="/teams/{{ team.id }}/m/new" role="button">
+                          <a id="newMember" class="btn btn-secondary btn-member float-right" href="/teams/{{ team.id }}/m/new" role="button">
                             <img src="/assets/images/add-user.svg" width="25" height="20">
                           </a>
                         </div>
@@ -117,7 +123,7 @@
                                   </td>
                                   <td class="align-middle">
                                     <a href="/teams/{{ team.id }}/m/{{ stringBuilderMemberInitials }}{{ id }}" class="btn btn-info btn-sm">view</a>
-                                    <button type="button" class="btn btn-info coming-soon-btn">edit</button>
+                                    <button type="button" class="btn btn-info btn-team coming-soon-btn">edit</button>
 
                                   </td>
                                 </tr>
@@ -191,6 +197,13 @@
 
         $('#editTeam').click(function() {
             $('#nav-settings-tab').tab('show');
+        });
+
+        $('#addMem').click(function() {
+          $('#nav-members-tab').tab('show');
+            setTimeout(function() {
+                window.location.href = "/teams/{{ team.id }}#newMember";
+            }, 500);
         });
 
         $('.coming-soon-btn').click(function() {
