@@ -11,21 +11,6 @@ public class App {
     public static void main(String[] args) {
         staticFileLocation("/public");
 
-        /*
-         *            CRUD
-         *   Create Read Update Delete
-         *
-         *   Route Handler Order
-         *       get: show new team form
-         *       post: process new team form
-         *       get: show all teams
-         *       get: show an individual team
-         *       get: show a form to update a team
-         *       post: process a form to update a team
-         *       get: delete an individual team
-         *       get: delete all team
-         * */
-
         // Root Route
         get("/", (request, response) -> {
            Map<String, Object> model = new HashMap<>();
@@ -43,6 +28,7 @@ public class App {
            String teamDesc = request.queryParams("teamDesc");
            new Team(teamName, teamDesc);
            model.put("teams", Team.getAll());
+           response.redirect("/teams");
            return new HandlebarsTemplateEngine().render(new ModelAndView(model, "teams.hbs"));
         });
         // get: show new member form
@@ -60,12 +46,12 @@ public class App {
             String firstName = request.queryParams("memberFirstName");
             String lastName = request.queryParams("memberLastName");
             String shortDesc = request.queryParams("memberShortDesc");
-//            String addMember = request.queryParams("inlineRadioOptions");
             int age = Integer.parseInt(request.queryParams("memberAge"));
             Members member = new Members(firstName, lastName, shortDesc, age);
             team.addMember(member);
             model.put("team", team);
             model.put("members", team.getAllMembers());
+            response.redirect("/teams/" + teamId);
             return new HandlebarsTemplateEngine().render(new ModelAndView(model, "team.hbs"));
         });
         // get: show all teams
@@ -110,6 +96,7 @@ public class App {
             updateTeam.setStringDescription(teamDesc);
             model.put("team", updateTeam);
             model.put("members", updateTeam.getAllMembers());
+            response.redirect("/teams/" + teamId);
             return new HandlebarsTemplateEngine().render(new ModelAndView(model, "team.hbs"));
         });
     }
