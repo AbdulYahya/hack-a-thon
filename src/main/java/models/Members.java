@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Members {
     private static List<Members> listMemberInstance = new ArrayList<>();
+    private StringBuilder stringBuilderMemberInitials = new StringBuilder();
     private String stringFirstName;
     private String stringLastName;
     private String stringShortDesc;
@@ -18,36 +19,28 @@ public class Members {
         this.intAge = intAge;
         listMemberInstance.add(this);
         this.id = listMemberInstance.size();
+
+        setStringBuilderMemberInitials(stringFirstName, stringLastName);
     }
 
-    public static void deleteAllMembers() {
-        listMemberInstance.clear();
-    }
+    public static void deleteAllMembers() { listMemberInstance.clear(); }
 
     public void deleteMember() { listMemberInstance.remove(id - 1); }
 
     public static Members findById(int id) { return listMemberInstance.get(id - 1); }
 
     // Getters
-    public static List<Members> getAll() {
-        return listMemberInstance;
-    }
+    public static List<Members> getAll() { return listMemberInstance; }
 
-    public String getStringFirstName() {
-        return stringFirstName;
-    }
+    public String getStringFirstName() { return stringFirstName; }
 
-    public String getStringLastName() {
-        return stringLastName;
-    }
+    public String getStringLastName() { return stringLastName; }
 
-    public String getStringShortDesc() {
-        return stringShortDesc;
-    }
+    public String getStringShortDesc() { return stringShortDesc; }
 
-    public int getIntAge() {
-        return intAge;
-    }
+    public StringBuilder getStringBuilderMemberInitials() { return stringBuilderMemberInitials; }
+
+    public int getIntAge() { return intAge; }
 
     public int getId() { return id; }
 
@@ -62,5 +55,12 @@ public class Members {
 
     public void setStringShortDesc(String stringShortDesc) {
         this.stringShortDesc = stringShortDesc;
+    }
+
+    private void setStringBuilderMemberInitials(String stringFirstName, String stringLastName) {
+        String fullName = stringFirstName + ' ' + stringLastName;
+        for (String initial : fullName.split(" ")) {
+            stringBuilderMemberInitials.append(initial.charAt(0));
+        }
     }
 }

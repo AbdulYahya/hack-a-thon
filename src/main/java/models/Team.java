@@ -5,10 +5,11 @@ import java.util.List;
 
 public class Team {
     private static List<Team> listTeamInstance = new ArrayList<>();
-    private List<Members> listMembers = new ArrayList<>();; // might have to initialize this list in the constructor
+    private List<Members> listMembers = new ArrayList<>();
     private String stringName;
     private String stringDescription;
     private int id;
+    private int teamSize;
 
     public Team(String stringName, String stringDescription) {
         this.stringName = stringName;
@@ -48,6 +49,10 @@ public class Team {
 
     public int getId() {
         return id;
+    }
+
+    public int getTeamSize() {
+        return teamSize = listMembers.size();
     }
 
     // Setter Methods

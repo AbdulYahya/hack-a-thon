@@ -1,3 +1,21 @@
+{{#partial "header"}}
+  <nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="/">
+      <img src="/assets/images/brand.svg" width="50" height="30" class="d-inline-block align-top" alt="SVG Brand">
+      <span class="pl-2">Hack-A-Thon</span>
+    </a>
+
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="/teams">Teams</a>
+      </li>
+    </ul>
+  </nav>
+{{/partial}}
+
 {{#partial "main"}}
   <div class="row">
     <div class="col">
@@ -7,7 +25,7 @@
             <div class="col">
               <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                  <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-teamName" role="tab" aria-controls="nav-teamName" aria-selected="true">{{team.stringName}}</a>
+                  <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-teamName" role="tab" aria-controls="nav-teamName" aria-selected="true">Profile</a>
                   <a class="nav-item nav-link" id="nav-members-tab" data-toggle="tab" href="#nav-members" role="tab" aria-controls="nav-members" aria-selected="false">Members</a>
                   <a class="nav-item nav-link" id="nav-settings-tab" data-toggle="tab" href="#nav-settings" role="tab" aria-controls="nav-settings" aria-selected="false">Settings</a>
                 </div>
@@ -16,37 +34,128 @@
                 <div class="tab-pane fade show active" id="nav-teamName" role="tabpanel" aria-labelledby="nav-home-tab">
                   <div class="card card-team">
                     <div class="card-body">
-                      <h4 class="card-title">Team Profile</h4>
+                      <h4 class="card-title">Team Statistics</h4>
+                      <div class="row">
+                        <div class="col">
+                          <table class="table">
+                            <thead class="thead-light">
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Team Size</th>
+                                <th scope="col"></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row" class="align-middle">{{ team.id }}</th>
+                                <td class="align-middle">{{ team.stringName }}</td>
+                                <td class="align-middle">
+                                  {{#unless team.stringDescription }}
+                                    <small id="addDesc" class="form-text text-muted">Edit team to add a description or click on this text.</small>
+                                  {{/unless}}
+                                  {{ team.stringDescription }}
+                                </td>
+                                <td class="align-middle">
+                                  {{#if team.teamSize }}
+                                    {{ team.teamSize }}
+                                  {{else}}
+                                    <small id="addMem" class="form-text text-warning">Empty team! Click here to add a member</small>
+                                  {{/if}}
+                                </td>
+                                <td class="align-middle">
+                                  <button id="editTeam" class="btn btn-info btn-team">edit</button>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div class="tab-pane fade" id="nav-members" role="tabpanel" aria-labelledby="nav-members-tab">
                   <div class="card card-team">
+                    <div class="alert alert-danger alert-dismissible fade" role="alert">
+                      <strong>Coming Soon!</strong>. We are working hard to bring you these awesome new features!
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
                     <div class="card-body">
-                      <h4 class="card-title">Team Members</h4>
-                      {{#if members}}
-                        if statement Team !!!!
-                        {{#each members}}
-                          GetAllMembers
-                          {{ stringFirstName }}
-                        {{/each}}
+                      <div class="row mb-4">
+                        <div class="col-4">
+                          <h4 class="card-title">Team Members</h4>
+                        </div>
+                        <div class="col-4"></div>
+                        <div class="col-4">
+                          <a id="newMember" class="btn btn-secondary btn-member float-right" href="/teams/{{ team.id }}/m/new" role="button">
+                            <img src="/assets/images/add-user.svg" width="25" height="20">
+                          </a>
+                        </div>
+                      </div>
+                      {{#if members }}
+                        <div class="table-responsive">
+                          <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">First</th>
+                                <th scope="col">Last</th>
+                                <th scope="col">Age</th>
+                                <th scope="col">Description</th>
+                                <th scope="col"></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {{#each members }}
+                                <tr>
+                                  <th scope="row" class="align-middle">{{ id }}</th>
+                                  <td class="align-middle">{{ stringFirstName }}</td>
+                                  <td class="align-middle">{{ stringLastName }}</td>
+                                  <td class="align-middle">{{ intAge }}</td>
+                                  <td class="align-middle">
+                                    {{#unless team.stringDescription }}
+                                      <small id="descMissing" class="form-text text-muted">Edit member to add a description.</small>
+                                    {{/unless}}
+                                    {{ stringShortDesc }}
+                                  </td>
+                                  <td class="align-middle">
+                                    <a href="/teams/{{ team.id }}/m/{{ stringBuilderMemberInitials }}{{ id }}" class="btn btn-info btn-sm">view</a>
+                                    <button type="button" class="btn btn-info btn-team coming-soon-btn">edit</button>
+
+                                  </td>
+                                </tr>
+                              {{/each}}
+                            </tbody>
+                          </table>
+                        </div>
+                      {{else}}
+                        <div class="jumbotron">
+                          <h1 class="team-member">No Members yet</h1>
+                          <p class="lead">Please add a member.</p>
+                        </div>
                       {{/if}}
                     </div>
                   </div>
                 </div>
                 <div class="tab-pane fade" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">
+                  <script>
+
+                  </script>
                   <div class="card card-team">
                     <div class="card-body">
                       <h4 class="card-title">Settings</h4>
                       <div class="row">
                         <div class="col-8">
-                          <form action="/teams/{{teams.id}}/update" method="post">
+                          <form action="/teams/{{ team.id }}/update" method="post">
                             <div class="form-group">
                               <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                   <span class="input-group-text" id="teamName-addon">Team Name</span>
                                 </div>
-                                <input type="text" id="teamName" name="teamName"  class="form-control" value="{{team.stringName}}" aria-label="Team Name" aria-describedby="teamName-addon">
+                                <input type="text" id="teamName" name="teamName"  class="form-control" value="{{ team.stringName }}" aria-label="Team Name" aria-describedby="teamName-addon">
                               </div>
                             </div>
                             <div class="form-group">
@@ -54,7 +163,7 @@
                                 <div class="input-group-prepend">
                                   <span class="input-group-text" id="teamDesc-addon">Team Description</span>
                                 </div>
-                                <input type="text" id="teamDesc" name="teamDesc"  class="form-control" value="{{team.stringDescription}}" aria-label="Team Description" aria-describedby="teamDesc-addon">
+                                <input type="text" id="teamDesc" name="teamDesc" class="form-control" value="{{ team.stringDescription }}" aria-label="Team Description" aria-describedby="teamDesc-addon">
                               </div>
                             </div>
                             <button type="submit" class="btn btn-info">Update Settings</button>
@@ -73,6 +182,35 @@
       </div>
     </div>
   </div>
+{{/partial}}
+
+{{#partial "scripts"}}
+  <script>
+    $(function () {
+        'use strict';
+        $('#addDesc').click(function() {
+            $('#nav-settings-tab').tab('show');
+            setTimeout(function(){
+                window.location.href = "/teams/{{ team.id }}#teamDesc";
+            }, 500);
+        });
+
+        $('#editTeam').click(function() {
+            $('#nav-settings-tab').tab('show');
+        });
+
+        $('#addMem').click(function() {
+          $('#nav-members-tab').tab('show');
+            setTimeout(function() {
+                window.location.href = "/teams/{{ team.id }}#newMember";
+            }, 500);
+        });
+
+        $('.coming-soon-btn').click(function() {
+            $('.alert').addClass('show');
+        })
+    });
+  </script>
 {{/partial}}
 
 {{> layout.hbs}}

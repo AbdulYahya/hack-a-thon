@@ -11,6 +11,10 @@ public class TeamTest {
         return new Team("NeverBrokeAgain", "Young NBA");
     }
 
+    private Members dummyMember() {
+        return new Members("Dummy", "Dummy", "Testing purposes", 99);
+    }
+
     @Before
     public void setUp() throws Exception {
     }
@@ -59,10 +63,10 @@ public class TeamTest {
     @Test
     public void findById_returnsCorrectTeamMember_boolean() throws Exception {
         Team testTeam = setupTeam();
-        Members testMember = new Members("Samwise", "Gamgee", "Testing", 20);
-        Members otherTestMember = new Members("Samwise2", "Gamgee2", "Testing2", 20);
-        testTeam.getAllMembers().add(testMember);
-        testTeam.getAllMembers().add(otherTestMember);
+        Members testMember = dummyMember();
+        Members otherTestMember = dummyMember();
+        testTeam.addMember(testMember);
+        testTeam.addMember(otherTestMember);
         assertTrue(testTeam.getAllMembers().contains(testMember));
         assertTrue(testTeam.getAllMembers().contains(otherTestMember));
     }
@@ -86,8 +90,8 @@ public class TeamTest {
     @Test
     public void getAllMembers_getAllMembersReturnsMembersCorrectly_boolean() throws Exception {
         Team testTeam = setupTeam();
-        Members testMember = new Members("Sam", "Wise", "Nothing", 20);
-        testTeam.getAllMembers().add(testMember);
+        Members testMember =  dummyMember();
+        testTeam.addMember(testMember);
         assertTrue(testTeam.getAllMembers().contains(testMember));
     }
 
@@ -108,6 +112,19 @@ public class TeamTest {
         Team.deleteAllTeams(); // Works without this. will continue to test.
         Team testTeam = setupTeam();
         assertEquals(1, testTeam.getId());
+    }
+
+    // Setter Methods
+    @Test
+    public void getTeamSize_getTeamSizeReturnsNumberOfMembersInATeam_int() throws Exception {
+        Team testTeam = setupTeam();
+        Members testMember = dummyMember();
+        Members otherTestMember = dummyMember();
+        Members otherOtherTestMember = dummyMember();
+        testTeam.addMember(testMember);
+        testTeam.addMember(otherTestMember);
+        testTeam.addMember(otherOtherTestMember);
+        assertEquals(3, testTeam.getTeamSize());
     }
 
     // Setter Methods
