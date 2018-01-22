@@ -85,7 +85,11 @@ public class TeamDaoTest {
     }
 
     @Test
-    public void update() {
+    public void update_updatesSpecifiedTeam() throws Exception {
+        Team team = setupNew();
+        teamDao.add(team);
+        teamDao.update(team.getId(), "Updated Team", "");
+        assertNotEquals(team.getName(), teamDao.findById(team.getId()).getName());
     }
 
     @Test
