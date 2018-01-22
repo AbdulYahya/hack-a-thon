@@ -78,7 +78,9 @@ public class TeamDaoTest {
     @Test
     public void findById_existingTeamsFoundById() throws Exception {
         Team team = setupNew();
+        Team otherTeam = setupNew();
         teamDao.add(team);
+        teamDao.add(otherTeam);
         assertEquals(team, teamDao.findById(team.getId()));
     }
 
