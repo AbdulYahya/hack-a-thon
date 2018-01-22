@@ -17,7 +17,124 @@
 {{/partial}}
 
 {{#partial "main"}}
-
+  <div class="row">
+    <div class="col">
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <nav>
+              <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-memberName" role="tab" aria-controls="nav-memberName" aria-selected="true">Member</a>
+                <a class="nav-item nav-link" id="nav-settings-tab" data-toggle="tab" href="#nav-memberSettings" role="tab" aria-controls="nav-memberSettings" aria-selected="false">Settings</a>
+              </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="nav-memberName" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="card card-team">
+                  <div class="card-body">
+                    <h4 class="card-title">Member {{ member.firstName }}'s Profile</h4>
+                    <div class="row">
+                      <div class="col">
+                        <table class="table">
+                          <thead class="thead-light">
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">First Name</th>
+                              <th scope="col">Last Name</th>
+                              <th scope="col">Description</th>
+                              <th scope="col">Age</th>
+                              <th scope="col">Team</th>
+                              <th scope="col"></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row" class="align-middle">{{ member.id }}</th>
+                              <td class="align-middle">{{ member.firstName }}</td>
+                              <td class="align-middle">{{ member.lastName }}</td>
+                              <td class="align-middle">
+                                {{#unless member.description }}
+                                  <small id="addDesc" class="form-text text-muted">Click here to add a description.</small>
+                                {{/unless}}
+                                {{ member.description }}
+                              </td>
+                              <td class="align-middle">{{ member.age }}</td>
+                              <td class="align-middle"><a href="/teams/{{ team.id }}" class="btn btn-info btn-team">{{ team.name }}</a></td>
+                              <td class="align-middle">
+                                <button id="editMember" class="btn btn-info btn-team">edit</button>
+                                <a href="/teams/{{ team.id }}/m/{{ member.firstName }}{{ member.id }}/delete" class="btn btn-danger btn-team">delete</a>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="nav-memberSettings" role="tabpanel" aria-labelledby="nav-settings-tab">
+                <div class="card card-team">
+                  <div class="card-body">
+                    <h4 class="card-title">Settings</h4>
+                    <div class="row">
+                      <div class="col">
+                        <form action="/teams/{{ team.id }}/m/{{ member.firstName }}{{ member.id }}/update" method="post">
+                          <div class="form-row">
+                            <div class="col">
+                              <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="memberFirstName-addon">First Name</span>
+                                </div>
+                                <input type="text" id="memberFirstName" name="memberFirstName" class="form-control" value="{{ member.firstName }}" aria-label="Member First Name" aria-describedby="memberFirstName-addon">
+                              </div>
+                            </div>
+                            <div class="col">
+                              <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="memberLastName-addon">Last Name</span>
+                                </div>
+                                <input type="text" id="memberLastName" name="memberLastName" class="form-control" value="{{ member.lastName }}" aria-label="Member Last Name" aria-describedby="memberLastName-addon">
+                              </div>
+                            </div>
+                            <div class="col">
+                              <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="memberAge-addon">Age</span>
+                                </div>
+                                <input type="number" id="memberAge" name="memberAge" class="form-control" value="{{ member.age }}" aria-label="Member Age" aria-describedby="memberAge-addon">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="memberDesc-addon">Description</span>
+                              </div>
+                              <input type="text" id="memberDesc" name="memberDesc" class="form-control" value="{{ member.description }}" aria-label="Member Description" aria-describedby="memberDesc-addon">
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 {{/partial}}
 
+{{#partial "scripts"}}
+  <script>
+    $(function() {
+        'use strict';
+        $('#editMember').click(function() {
+           $('#nav-settings-tab').tab('show');
+        });
+    });
+  </script>
+{{/partial}}
 {{> layout.hbs}}
