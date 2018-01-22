@@ -20,8 +20,7 @@ public class TeamDao implements iTeamDao {
         String sql = "INSERT INTO teams (name) VALUES (:name)";
         try (Connection con = sql2o.open()) {
             int id = (int) con.createQuery(sql)
-                    .addParameter("name", team.getName())
-                    .addColumnMapping("NAME", "name")
+                    .bind(team)
                     .executeUpdate()
                     .getKey();
             team.setId(id);
