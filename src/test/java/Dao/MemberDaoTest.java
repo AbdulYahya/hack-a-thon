@@ -89,6 +89,13 @@ public class MemberDaoTest {
     }
 
     @Test
-    public void deleteAll() {
+    public void deleteAll_deletesAllMembers() throws Exception {
+        Member member = setupNew();
+        Member otherMember = setupNew();
+        memberDao.add(member);
+        memberDao.add(otherMember);
+        int memberSize = memberDao.getAll().size();
+        memberDao.deleteAll();
+        assertTrue(memberSize > 0 && memberSize > memberDao.getAll().size());
     }
 }
