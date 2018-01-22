@@ -101,6 +101,13 @@ public class TeamDaoTest {
     }
 
     @Test
-    public void deleteAll() {
+    public void deleteAll_deletesAllTeams() throws Exception {
+        Team team = setupNew();
+        Team otherTeam = setupNew();
+        teamDao.add(team);
+        teamDao.add(otherTeam);
+        int teamSize = teamDao.getAll().size();
+        teamDao.deleteAll();
+        assertTrue(teamSize > 0 && teamSize > teamDao.getAll().size());
     }
 }
