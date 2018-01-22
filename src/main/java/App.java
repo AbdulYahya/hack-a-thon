@@ -39,6 +39,13 @@ public class App {
            response.redirect("/teams");
            return new HandlebarsTemplateEngine().render(new ModelAndView(model, "teams.hbs"));
         });
+        // get: delete all teams
+        get("/teams/delete", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            teamDao.deleteAll();
+            response.redirect("/teams");
+            return new HandlebarsTemplateEngine().render(new ModelAndView(model, "teams.hbs"));
+        });
         // get: show new member form
         get("/teams/:id/m/new", (request, response) -> {
            Map<String, Object> model = new HashMap<>();
