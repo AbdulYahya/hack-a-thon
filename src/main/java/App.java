@@ -112,7 +112,15 @@ public class App {
            model.put("members", memberDao.findById(userId));
            return new HandlebarsTemplateEngine().render(new ModelAndView(model, "index.hbs"));
         });
-        // get: delete member
+        // get: delete a team
+        get("/teams/:id/delete", (request, response) -> {
+           Map<String, Object> model = new HashMap<>();
+           int teamId = Integer.parseInt(request.params("id"));
+           teamDao.deleteById(teamId);
+           response.redirect("/teams");
+           return new HandlebarsTemplateEngine().render(new ModelAndView(model, "teams.hbs"));
+        });
+        // get: delete a member
         get("/teams/:id/m/:userId/delete", (request, response) -> {
           Map<String, Object> model = new HashMap<>();
           int teamId = Integer.parseInt(request.params("id"));
