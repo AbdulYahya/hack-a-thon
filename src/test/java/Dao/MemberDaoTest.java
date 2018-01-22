@@ -53,7 +53,16 @@ public class MemberDaoTest {
     }
 
     @Test
-    public void findById() {
+    public void findById_existingMembersFoundById() throws Exception {
+        Member member = setupNew();
+        Member otherMember = setupNew();
+        memberDao.add(member);
+        memberDao.add(otherMember);
+        assertEquals(member, memberDao.findById(member.getId()));
+    }
+
+    @Test
+    public void findById_returnsCorrectMemberWhenMoreThanOneMemberExists() throws Exception {
     }
 
     @Test
