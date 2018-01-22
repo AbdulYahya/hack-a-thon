@@ -53,6 +53,11 @@ public class TeamDaoTest {
     }
 
     @Test
+    public void getAll_returnsNothingIfNoTeamsExist() throws Exception {
+        assertEquals(0, teamDao.getAll().size());
+    }
+
+    @Test
     public void getAllMembersByTeam() {
     }
 
