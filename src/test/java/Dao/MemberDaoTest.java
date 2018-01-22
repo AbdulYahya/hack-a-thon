@@ -42,7 +42,14 @@ public class MemberDaoTest {
     }
 
     @Test
-    public void getAll() {
+    public void getAll_returnsAllMembers() throws Exception {
+        Member member = setupNew();
+        Member otherMember = setupNew();
+        memberDao.add(member);
+        memberDao.add(otherMember);
+        assertEquals(2, memberDao.getAll().size());
+        assertTrue(memberDao.getAll().contains(member));
+        assertTrue(memberDao.getAll().contains(otherMember));
     }
 
     @Test
