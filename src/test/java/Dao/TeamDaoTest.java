@@ -1,5 +1,6 @@
 package Dao;
 
+import models.Member;
 import models.Team;
 import org.junit.After;
 import org.junit.Before;
@@ -58,7 +59,20 @@ public class TeamDaoTest {
     }
 
     @Test
-    public void getAllMembersByTeam() {
+    public void getAllMembersByTeam_returnsAllMembersByTeamId() throws Exception {
+        Team team = setupNew();
+        teamDao.add(team);
+        int teamId = team.getId();
+        Member member = new Member("Samwise", "Gamgee", "Testing", 20);
+        Member otherMember = new Member("Young", "NBA", "Artist", 22);
+        Member otherOtherMember = new Member("Doesn't", "Return", "Is not added to team", 0);
+        memberDao.add(member);
+        memberDao.add(otherMember);
+
+        assertEquals(2, teamDao.getAllMembersByTeam(teamId).size());
+        assertTrue(teamDao.getAllMembersByTeam(teamId).contains(member));
+        assertTrue(teamDao.getAllMembersByTeam(teamId).contains(otherMember));
+        assertFalse(teamDao.getAllMembersByTeam(teamId).contains(otherOtherMember));
     }
 
     @Test
