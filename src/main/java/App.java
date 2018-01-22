@@ -56,8 +56,8 @@ public class App {
             int age = Integer.parseInt(request.queryParams("memberAge"));
             Member member = new Member(firstName, lastName, description, age, teamId);
             memberDao.add(member);
-            model.put("team", teamDao.findById(teamId));
-            model.put("members", teamDao.getAllMembersByTeam(teamId));
+//            model.put("team", teamDao.findById(teamId));
+//            model.put("members", teamDao.getAllMembersByTeam(teamId));
             response.redirect("/teams/" + teamId);
             return new HandlebarsTemplateEngine().render(new ModelAndView(model, "team.hbs"));
         });
@@ -71,8 +71,7 @@ public class App {
         get("/teams/:id", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             int teamId = Integer.parseInt(request.params("id"));
-            Team team = teamDao.findById(teamId);
-            model.put("team", team);
+            model.put("team", teamDao.findById(teamId));
             model.put("members", teamDao.getAllMembersByTeam(teamId));
             return new HandlebarsTemplateEngine().render(new ModelAndView(model, "team.hbs"));
         });
@@ -80,7 +79,7 @@ public class App {
         get("/teams/:id/m/:userId", (request, response) -> {
            Map<String, Object> model = new HashMap<>();
            int teamId = Integer.parseInt(request.params("id"));
-           int userId = Integer.parseInt(request.params("userId").substring(2));
+           int userId = Integer.parseInt(request.params("userId").replaceAll("[^0-9]", ""));
            model.put("team", teamDao.findById(teamId));
            model.put("member", memberDao.findById(userId));
            return new HandlebarsTemplateEngine().render(new ModelAndView(model, "member.hbs"));
@@ -110,6 +109,8 @@ public class App {
            Map<String, Object> model = new HashMap<>();
            int teamId = Integer.parseInt(request.params("id"));
            int userId = Integer.parseInt(request.params("userId").substring(2));
+           model.put("team", teamDao.findById(teamId));
+           model.put("members", memberDao.findById(userId));
            return new HandlebarsTemplateEngine().render(new ModelAndView(model, "index.hbs"));
         });
     }

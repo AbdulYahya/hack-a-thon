@@ -3,7 +3,7 @@ package models;
 import java.util.Objects;
 
 public class Member {
-    private StringBuilder stringBuilderMemberInitials = new StringBuilder();
+//    private StringBuilder memberInitials = new StringBuilder();
     private String firstName;
     private String lastName;
     private String description;
@@ -18,11 +18,11 @@ public class Member {
         this.age = age;
         this.teamId = teamId;
 
-        setStringBuilderMemberInitials(firstName, lastName);
+//        setMemberInitials(firstName, lastName);
     }
 
     // Getters
-    public StringBuilder getStringBuilderMemberInitials() { return stringBuilderMemberInitials; }
+//    public StringBuilder getMemberInitials() { return memberInitials; }
 
     public String getFirstName() { return firstName; }
 
@@ -54,12 +54,12 @@ public class Member {
         this.age = age;
     }
 
-    private void setStringBuilderMemberInitials(String firstName, String lastName) {
-        String fullName = firstName + ' ' + lastName;
-        for (String initial : fullName.split(" ")) {
-            stringBuilderMemberInitials.append(initial.charAt(0));
-        }
-    }
+//    private void setMemberInitials(String firstName, String lastName) {
+//        String fullName = firstName + ' ' + lastName;
+//        for (String initial : fullName.split(" ")) {
+//            memberInitials.append(initial.charAt(0));
+//        }
+//    }
 
     public void setId(int id) {
         this.id = id;
@@ -73,16 +73,25 @@ public class Member {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Member member = (Member) o;
-        return age == member.age &&
-                id == member.id &&
-                teamId == member.teamId &&
-                Objects.equals(firstName, member.firstName) &&
-                Objects.equals(lastName, member.lastName);
+
+        if (age != member.age) return false;
+        if (id != member.id) return false;
+        if (teamId != member.teamId) return false;
+        if (!firstName.equals(member.firstName)) return false;
+        if (!lastName.equals(member.lastName)) return false;
+        return description != null ? description.equals(member.description) : member.description == null;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, age, id, teamId);
+        int result = firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + age;
+        result = 31 * result + id;
+        result = 31 * result + teamId;
+        return result;
     }
 }

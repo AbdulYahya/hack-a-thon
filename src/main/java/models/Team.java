@@ -40,14 +40,19 @@ public class Team {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Team team = (Team) o;
-        return id == team.id &&
-                Objects.equals(name, team.name) &&
-                Objects.equals(description, team.description);
+
+        if (id != team.id) return false;
+        if (!name.equals(team.name)) return false;
+        return description != null ? description.equals(team.description) : team.description == null;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, description, id);
+        int result = name.hashCode();
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + id;
+        return result;
     }
 }
