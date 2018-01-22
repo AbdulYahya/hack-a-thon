@@ -71,7 +71,13 @@ public class MemberDaoTest {
     }
 
     @Test
-    public void update() {
+    public void update_updatesSpecifiedMember() throws Exception {
+        Member member = setupNew();
+        memberDao.add(member);
+        memberDao.update(member.getId(), "Updated", "Updated", "Testing update method", 24, 1);
+        assertNotEquals(member.getFirstName(), memberDao.findById(member.getId()).getFirstName());
+        assertNotEquals(member.getLastName(), memberDao.findById(member.getId()).getLastName());
+        assertNotEquals(member.getDescription(), memberDao.findById(member.getId()).getDescription());
     }
 
     @Test
