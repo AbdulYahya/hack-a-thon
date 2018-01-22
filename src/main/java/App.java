@@ -33,7 +33,8 @@ public class App {
            Map<String, Object> model = new HashMap<>();
            String teamName = request.queryParams("teamName");
            String teamDesc = request.queryParams("teamDesc");
-           new Team(teamName, teamDesc);
+           Team team = new Team(teamName, teamDesc);
+           teamDao.add(team);
            model.put("teams", teamDao.getAll());
            response.redirect("/teams");
            return new HandlebarsTemplateEngine().render(new ModelAndView(model, "teams.hbs"));
@@ -49,14 +50,13 @@ public class App {
         post("/teams/:id/m/new", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             int teamId = Integer.parseInt(request.params("id"));
-            Team team = teamDao.findById(teamId);
             String firstName = request.queryParams("memberFirstName");
             String lastName = request.queryParams("memberLastName");
-            String shortDesc = request.queryParams("memberShortDesc");
+            String description = request.queryParams("memberShortDesc");
             int age = Integer.parseInt(request.queryParams("memberAge"));
-            Member member = new Member(firstName, lastName, shortDesc, age, 0);
+            Member member = new Member(firstName, lastName, description, age, teamId);
             memberDao.add(member);
-            model.put("team", team);
+            model.put("team", teamDao.findById(teamId));
             model.put("members", teamDao.getAllMembersByTeam(teamId));
             response.redirect("/teams/" + teamId);
             return new HandlebarsTemplateEngine().render(new ModelAndView(model, "team.hbs"));
@@ -82,7 +82,7 @@ public class App {
            int teamId = Integer.parseInt(request.params("id"));
            int userId = Integer.parseInt(request.params("userId").substring(2));
            model.put("team", teamDao.findById(teamId));
-//           model.put("member", memberDao.findById(userId));
+           model.put("member", memberDao.findById(userId));
            return new HandlebarsTemplateEngine().render(new ModelAndView(model, "member.hbs"));
         });
         // get: show a form to update a team
@@ -96,12 +96,10 @@ public class App {
         post("/teams/:id/update", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             int teamId = Integer.parseInt(request.params("id"));
-            Team updateTeam = teamDao.findById(teamId);
             String teamName = request.queryParams("teamName");
             String teamDesc = request.queryParams("teamDesc");
-            updateTeam.setName(teamName);
-            updateTeam.setDescription(teamDesc);
-            model.put("team", updateTeam);
+            teamDao.update(teamId, teamName, teamDesc);
+            model.put("team", teamDao.findById(teamId));
             model.put("members", teamDao.getAllMembersByTeam(teamId));
             response.redirect("/teams/" + teamId);
             return new HandlebarsTemplateEngine().render(new ModelAndView(model, "team.hbs"));

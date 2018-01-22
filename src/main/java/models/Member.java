@@ -32,6 +32,7 @@ public class Member {
 
     public int getAge() { return age; }
 
+
     public int getId() { return id; }
 
     public int getTeamId() { return teamId; }

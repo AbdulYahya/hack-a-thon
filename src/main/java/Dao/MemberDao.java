@@ -84,6 +84,12 @@ public class MemberDao implements iMemberDao {
 
     @Override
     public void deleteAll() {
-
+        String sql = "DELETE FROM members";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .executeUpdate();
+        } catch (Sql2oException ex) {
+            System.out.println(ex);
+        }
     }
 }
