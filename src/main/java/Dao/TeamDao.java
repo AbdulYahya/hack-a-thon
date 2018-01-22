@@ -82,6 +82,12 @@ public class TeamDao implements iTeamDao {
 
     @Override
     public void deleteAll() {
-
+        String sql = "DELETE FROM teams";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .executeUpdate();
+        } catch (Sql2oException ex) {
+            System.out.println(ex);
+        }
     }
 }
