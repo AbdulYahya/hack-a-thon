@@ -57,8 +57,16 @@ public class TeamDao implements iTeamDao {
 
      @Override
     public void update(int id, String name, String description) {
-
-     }
+        String sql = "UPDATE teams SET name = :name, description = :description";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .addParameter("name", name)
+                    .addParameter("description", description)
+                    .executeUpdate();
+        } catch (Sql2oException ex) {
+            System.out.println(ex);
+        }
+    }
 
     @Override
     public void deleteById(int id) {
