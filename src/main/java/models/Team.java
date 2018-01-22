@@ -1,70 +1,59 @@
 package models;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 public class Team {
-    private static List<Team> listTeamInstance = new ArrayList<>();
-    private List<Members> listMembers = new ArrayList<>();
-    private String stringName;
-    private String stringDescription;
+    private String name;
+    private String description;
     private int id;
     private int teamSize;
 
-    public Team(String stringName, String stringDescription) {
-        this.stringName = stringName;
-        this.stringDescription = stringDescription;
-        listTeamInstance.add(this);
-        this.id = listTeamInstance.size();
-    }
-
-    public static void deleteAllTeams() {
-        listTeamInstance.clear();
-    }
-
-    public void deleteTeam() {
-        listTeamInstance.remove(id - 1);
-    }
-
-    public static Team findById(int id) {
-        return listTeamInstance.get(id - 1);
+    public Team(String name, String description) {
+        this.name = name;
+        this.description = description;
     }
 
     // Getter Methods
-    public static List<Team> getAll() {
-        return listTeamInstance;
-    }
-
-    public List<Members> getAllMembers() {
-        return listMembers;
-    }
-
-    public String getStringName() {
-        return stringName;
-    }
-
-    public String getStringDescription() {
-        return stringDescription;
-    }
-
     public int getId() {
         return id;
     }
 
-    public int getTeamSize() {
-        return teamSize = listMembers.size();
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     // Setter Methods
-    public void setStringName(String stringName) {
-        this.stringName = stringName;
+    public void setId(int id) { this.id = id; }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setStringDescription(String stringDescription) {
-        this.stringDescription = stringDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void addMember(Members member) {
-        this.listMembers.add(member);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Team team = (Team) o;
+
+        if (id != team.id) return false;
+        if (!name.equals(team.name)) return false;
+        return description != null ? description.equals(team.description) : team.description == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + id;
+        return result;
     }
 }

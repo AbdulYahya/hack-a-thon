@@ -50,12 +50,12 @@
                             <tbody>
                               <tr>
                                 <th scope="row" class="align-middle">{{ team.id }}</th>
-                                <td class="align-middle">{{ team.stringName }}</td>
+                                <td class="align-middle">{{ team.name }}</td>
                                 <td class="align-middle">
-                                  {{#unless team.stringDescription }}
+                                  {{#unless team.description }}
                                     <small id="addDesc" class="form-text text-muted">Edit team to add a description or click on this text.</small>
                                   {{/unless}}
-                                  {{ team.stringDescription }}
+                                  {{ team.description }}
                                 </td>
                                 <td class="align-middle">
                                   {{#if team.teamSize }}
@@ -66,6 +66,7 @@
                                 </td>
                                 <td class="align-middle">
                                   <button id="editTeam" class="btn btn-info btn-team">edit</button>
+                                  <a href="/teams/{{ team.id }}/delete" class="btn btn-danger btn-team">delete</a>
                                 </td>
                               </tr>
                             </tbody>
@@ -77,12 +78,12 @@
                 </div>
                 <div class="tab-pane fade" id="nav-members" role="tabpanel" aria-labelledby="nav-members-tab">
                   <div class="card card-team">
-                    <div class="alert alert-danger alert-dismissible fade" role="alert">
-                      <strong>Coming Soon!</strong>. We are working hard to bring you these awesome new features!
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
+                    <!--<div class="alert alert-danger alert-dismissible fade" role="alert">-->
+                      <!--<strong>Coming Soon!</strong>. We are working hard to bring you these awesome new features!-->
+                      <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+                        <!--<span aria-hidden="true">&times;</span>-->
+                      <!--</button>-->
+                    <!--</div>-->
                     <div class="card-body">
                       <div class="row mb-4">
                         <div class="col-4">
@@ -112,19 +113,18 @@
                               {{#each members }}
                                 <tr>
                                   <th scope="row" class="align-middle">{{ id }}</th>
-                                  <td class="align-middle">{{ stringFirstName }}</td>
-                                  <td class="align-middle">{{ stringLastName }}</td>
-                                  <td class="align-middle">{{ intAge }}</td>
+                                  <td class="align-middle">{{ firstName }}</td>
+                                  <td class="align-middle">{{ lastName }}</td>
+                                  <td class="align-middle">{{ age }}</td>
                                   <td class="align-middle">
-                                    {{#unless team.stringDescription }}
+                                    {{#unless description }}
                                       <small id="descMissing" class="form-text text-muted">Edit member to add a description.</small>
                                     {{/unless}}
-                                    {{ stringShortDesc }}
+                                    {{ description }}
                                   </td>
                                   <td class="align-middle">
-                                    <a href="/teams/{{ team.id }}/m/{{ stringBuilderMemberInitials }}{{ id }}" class="btn btn-info btn-sm">view</a>
-                                    <button type="button" class="btn btn-info btn-team coming-soon-btn">edit</button>
-
+                                    <a href="/teams/{{ team.id }}/m/{{ firstName }}{{ id }}" class="btn btn-info btn-sm">view</a>
+                                    <a href="/teams/{{ team.id }}/m/{{ firstName }}{{ id }}/delete" class="btn btn-danger btn-team">Delete</a>
                                   </td>
                                 </tr>
                               {{/each}}
@@ -155,7 +155,7 @@
                                 <div class="input-group-prepend">
                                   <span class="input-group-text" id="teamName-addon">Team Name</span>
                                 </div>
-                                <input type="text" id="teamName" name="teamName"  class="form-control" value="{{ team.stringName }}" aria-label="Team Name" aria-describedby="teamName-addon">
+                                <input type="text" id="teamName" name="teamName"  class="form-control" value="{{ team.name }}" aria-label="Team Name" aria-describedby="teamName-addon">
                               </div>
                             </div>
                             <div class="form-group">
@@ -163,7 +163,7 @@
                                 <div class="input-group-prepend">
                                   <span class="input-group-text" id="teamDesc-addon">Team Description</span>
                                 </div>
-                                <input type="text" id="teamDesc" name="teamDesc" class="form-control" value="{{ team.stringDescription }}" aria-label="Team Description" aria-describedby="teamDesc-addon">
+                                <input type="text" id="teamDesc" name="teamDesc" class="form-control" value="{{ team.description }}" aria-label="Team Description" aria-describedby="teamDesc-addon">
                               </div>
                             </div>
                             <button type="submit" class="btn btn-info">Update Settings</button>
@@ -201,14 +201,14 @@
 
         $('#addMem').click(function() {
           $('#nav-members-tab').tab('show');
-            setTimeout(function() {
-                window.location.href = "/teams/{{ team.id }}#newMember";
-            }, 500);
+          setTimeout(function() {
+              window.location.href = "/teams/{{ team.id }}#newMember";
+          }, 500);
         });
 
-        $('.coming-soon-btn').click(function() {
-            $('.alert').addClass('show');
-        })
+        // $('.coming-soon-btn').click(function() {
+        //     $('.alert').addClass('show');
+        // })
     });
   </script>
 {{/partial}}
