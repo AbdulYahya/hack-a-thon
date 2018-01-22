@@ -63,9 +63,9 @@ public class TeamDaoTest {
         Team team = setupNew();
         teamDao.add(team);
         int teamId = team.getId();
-        Member member = new Member("Samwise", "Gamgee", "Testing", 20);
-        Member otherMember = new Member("Young", "NBA", "Artist", 22);
-        Member otherOtherMember = new Member("Doesn't", "Return", "Is not added to team", 0);
+        Member member = new Member("Samwise", "Gamgee", "Test", 20, teamId);
+        Member otherMember = new Member("Young", "NBA", "Artist", 22, teamId);
+        Member otherOtherMember = new Member("Doesn't", "Return", "Is not added to team", 0, teamId);
         memberDao.add(member);
         memberDao.add(otherMember);
 

@@ -18,7 +18,7 @@ public class TeamTest {
     }
 
     private Member dummyMember() {
-        return new Member("Dummy", "Dummy", "Testing purposes", 99);
+        return new Member("Dummy", "Dummy", "Testing purposes", 99, 1);
     }
 
     @Before
@@ -150,7 +150,7 @@ public class TeamTest {
     @Test
     public void addMember_addsNewMember_List() throws Exception {
         Team testTeam = setupTeam();
-        Member member = new Member("Samwise", "Gamgee", "Nothing", 22);
+        Member member = new Member("Samwise", "Gamgee", "Nothing", 22, 1);
 //        testTeam.addMember(member);
         assertTrue(teamDao.getAllMembersByTeam(testTeam.getId()).contains(member));
 

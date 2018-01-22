@@ -39,7 +39,11 @@ public class TeamDao implements iTeamDao {
 
     @Override
     public List<Member> getAllMembersByTeam(int teamId) {
-        return null;
+        try (Connection con = sql2o.open()) {
+            return con.createQuery("SELECT * FROM members WHERE teamId = :teamId")
+                    .addParameter("teamId", teamId)
+                    .executeAndFetch(Member.class);
+        }
     }
 
     @Override

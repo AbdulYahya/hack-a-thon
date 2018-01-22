@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS teams (
 
 CREATE TABLE IF NOT EXISTS members (
   id int PRIMARY KEY AUTO_INCREMENT,
-  memberid INTEGER,
+  teamid INTEGER,
   firstname VARCHAR,
   lastname VARCHAR,
   description VARCHAR,

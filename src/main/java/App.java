@@ -54,7 +54,7 @@ public class App {
             String lastName = request.queryParams("memberLastName");
             String shortDesc = request.queryParams("memberShortDesc");
             int age = Integer.parseInt(request.queryParams("memberAge"));
-            Member member = new Member(firstName, lastName, shortDesc, age);
+            Member member = new Member(firstName, lastName, shortDesc, age, 0);
             memberDao.add(member);
             model.put("team", team);
             model.put("members", teamDao.getAllMembersByTeam(teamId));
@@ -82,7 +82,7 @@ public class App {
            int teamId = Integer.parseInt(request.params("id"));
            int userId = Integer.parseInt(request.params("userId").substring(2));
            model.put("team", teamDao.findById(teamId));
-           model.put("member", Member.findById(userId));
+//           model.put("member", memberDao.findById(userId));
            return new HandlebarsTemplateEngine().render(new ModelAndView(model, "member.hbs"));
         });
         // get: show a form to update a team

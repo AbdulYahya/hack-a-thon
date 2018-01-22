@@ -2,65 +2,88 @@ package models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Member {
-    private static List<Member> listMemberInstance = new ArrayList<>();
     private StringBuilder stringBuilderMemberInitials = new StringBuilder();
-    private String stringFirstName;
-    private String stringLastName;
-    private String stringShortDesc;
-    private int intAge;
+    private String firstName;
+    private String lastName;
+    private String description;
+    private int age;
     private int id;
+    private int teamId;
 
-    public Member(String stringFirstName, String stringLastName, String stringShortDesc, int intAge) {
-        this.stringFirstName = stringFirstName;
-        this.stringLastName = stringLastName;
-        this.stringShortDesc = stringShortDesc;
-        this.intAge = intAge;
-        listMemberInstance.add(this);
-        this.id = listMemberInstance.size();
+    public Member(String firstName, String lastName, String description, int age, int teamId) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.description = description;
+        this.age = age;
+        this.teamId = teamId;
 
-        setStringBuilderMemberInitials(stringFirstName, stringLastName);
+        setStringBuilderMemberInitials(firstName, lastName);
     }
 
-    public static void deleteAllMembers() { listMemberInstance.clear(); }
-
-    public void deleteMember() { listMemberInstance.remove(id - 1); }
-
-    public static Member findById(int id) { return listMemberInstance.get(id - 1); }
-
     // Getters
-    public static List<Member> getAll() { return listMemberInstance; }
-
-    public String getStringFirstName() { return stringFirstName; }
-
-    public String getStringLastName() { return stringLastName; }
-
-    public String getStringShortDesc() { return stringShortDesc; }
-
     public StringBuilder getStringBuilderMemberInitials() { return stringBuilderMemberInitials; }
 
-    public int getIntAge() { return intAge; }
+    public String getFirstName() { return firstName; }
+
+    public String getLastName() { return lastName; }
+
+    public String getDescription() { return description; }
+
+    public int getAge() { return age; }
 
     public int getId() { return id; }
 
+    public int getTeamId() { return teamId; }
+
     // Setters
-    public void setStringFirstName(String stringFirstName) {
-        this.stringFirstName = stringFirstName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setStringLastName(String stringLastName) {
-        this.stringLastName = stringLastName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public void setStringShortDesc(String stringShortDesc) {
-        this.stringShortDesc = stringShortDesc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    private void setStringBuilderMemberInitials(String stringFirstName, String stringLastName) {
-        String fullName = stringFirstName + ' ' + stringLastName;
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    private void setStringBuilderMemberInitials(String firstName, String lastName) {
+        String fullName = firstName + ' ' + lastName;
         for (String initial : fullName.split(" ")) {
             stringBuilderMemberInitials.append(initial.charAt(0));
         }
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setTeamId(int teamId) {
+        this.teamId = teamId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Member member = (Member) o;
+        return age == member.age &&
+                id == member.id &&
+                teamId == member.teamId &&
+                Objects.equals(firstName, member.firstName) &&
+                Objects.equals(lastName, member.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, age, id, teamId);
     }
 }
