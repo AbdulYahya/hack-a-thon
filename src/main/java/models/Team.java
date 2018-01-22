@@ -6,6 +6,7 @@ public class Team {
     private String name;
     private String description;
     private int id;
+    private int teamSize;
 
     public Team(String name, String description) {
         this.name = name;
