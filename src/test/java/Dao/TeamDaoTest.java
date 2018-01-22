@@ -93,7 +93,7 @@ public class TeamDaoTest {
     }
 
     @Test
-    public void deleteById_deletesSpecifiecTeam() throws Exception {
+    public void deleteById_deletesSpecifiedTeam() throws Exception {
         Team team = setupNew();
         teamDao.add(team);
         teamDao.deleteById(team.getId());
