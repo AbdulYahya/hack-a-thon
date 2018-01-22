@@ -22,7 +22,6 @@ public class TeamDao implements iTeamDao {
             int id = (int) con.createQuery(sql)
                     .addParameter("name", team.getName())
                     .addColumnMapping("NAME", "name")
-                    .addColumnMapping("DESCRIPTION", "description")
                     .executeUpdate()
                     .getKey();
             team.setId(id);
