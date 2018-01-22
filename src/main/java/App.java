@@ -63,8 +63,6 @@ public class App {
             int age = Integer.parseInt(request.queryParams("memberAge"));
             Member member = new Member(firstName, lastName, description, age, teamId);
             memberDao.add(member);
-//            model.put("team", teamDao.findById(teamId));
-//            model.put("members", teamDao.getAllMembersByTeam(teamId));
             response.redirect("/teams/" + teamId);
             return new HandlebarsTemplateEngine().render(new ModelAndView(model, "team.hbs"));
         });
@@ -109,15 +107,6 @@ public class App {
             model.put("members", teamDao.getAllMembersByTeam(teamId));
             response.redirect("/teams/" + teamId);
             return new HandlebarsTemplateEngine().render(new ModelAndView(model, "team.hbs"));
-        });
-        // get: process a form to update a team member
-        get("/teams/:id/m/:userId/update", (request, response) -> {
-           Map<String, Object> model = new HashMap<>();
-           int teamId = Integer.parseInt(request.params("id"));
-           int userId = Integer.parseInt(request.params("userId").replaceAll("[^0-9]", ""));
-           model.put("team", teamDao.findById(teamId));
-           model.put("members", memberDao.findById(userId));
-           return new HandlebarsTemplateEngine().render(new ModelAndView(model, "index.hbs"));
         });
         // post: process form to update a team member
         post("/teams/:id/m/:userId/update", (request, response) -> {

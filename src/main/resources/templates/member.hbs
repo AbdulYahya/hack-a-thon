@@ -135,6 +135,13 @@
         $('#editMember').click(function() {
            $('#nav-settings-tab').tab('show');
         });
+
+        $('#addDesc').click(function() {
+            $('#nav-settings-tab').tab('show');
+            setTimeout(function() {
+                window.location.href = "/teams/{{ team.id }}/m/{{ member.firstName }}{{ member.id }}#memberDesc";
+            }, 500);
+        })
     });
   </script>
 {{/partial}}
