@@ -1,18 +1,24 @@
 package models;
 
+import Dao.TeamDao;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.sql2o.Sql2o;
 
 import static org.junit.Assert.*;
 
 public class TeamTest {
+    String connectionString = "jdbc:mem:testing;INIT=RUNSCRIPT FROM 'classpath:db/create.sql'";
+    Sql2o sql2o = new Sql2o(connectionString, "", "");
+    TeamDao teamDao = new TeamDao(sql2o);
+
     private Team setupTeam() {
         return new Team("NeverBrokeAgain", "Young NBA");
     }
 
-    private Members dummyMember() {
-        return new Members("Dummy", "Dummy", "Testing purposes", 99);
+    private Member dummyMember() {
+        return new Member("Dummy", "Dummy", "Testing purposes", 99);
     }
 
     @Before
@@ -21,7 +27,7 @@ public class TeamTest {
 
     @After
     public void tearDown() throws Exception {
-        Team.deleteAllTeams();
+        teamDao.deleteAll();
     }
 
     @Test
@@ -34,41 +40,41 @@ public class TeamTest {
     public void deleteAllTeams_deletesAllTeams_boolean() throws Exception {
         Team testTeam = setupTeam();
         Team otherTestTeam = setupTeam();
-        Team.deleteAllTeams();
-        assertEquals(0, Team.getAll().size());
+        teamDao.deleteAll();
+        assertEquals(0, teamDao.getAll().size());
     }
 
     @Test
     public void deleteTeam_deletesASpecificTeam_boolean() throws Exception {
         Team testTeam = setupTeam();
         Team otherTestTeam = setupTeam();
-        testTeam.deleteTeam();
-        assertEquals(1, Team.getAll().size());
-        assertEquals(Team.getAll().get(0).getId(), 2);
+        teamDao.deleteById(testTeam.getId());
+        assertEquals(1, teamDao.getAll().size());
+        assertEquals(teamDao.getAll().get(0).getId(), 2);
     }
 
     @Test
     public void findById_returnsCorrectTeam_boolean() throws Exception {
         Team testTeam = setupTeam();
-        assertEquals(1, Team.findById(testTeam.getId()).getId());
+        assertEquals(1, teamDao.findById(testTeam.getId()).getId());
     }
 
     @Test
     public void findById_returnsCorrectTeamWhenMoreThanOneTeamExists_boolean() throws Exception {
         Team testTeam = setupTeam();
         Team otherTestTeam = setupTeam();
-        assertEquals(2, Team.findById(otherTestTeam.getId()).getId());
+        assertEquals(2, teamDao.findById(otherTestTeam.getId()).getId());
     }
 
     @Test
     public void findById_returnsCorrectTeamMember_boolean() throws Exception {
         Team testTeam = setupTeam();
-        Members testMember = dummyMember();
-        Members otherTestMember = dummyMember();
-        testTeam.addMember(testMember);
-        testTeam.addMember(otherTestMember);
-        assertTrue(testTeam.getAllMembers().contains(testMember));
-        assertTrue(testTeam.getAllMembers().contains(otherTestMember));
+        Member testMember = dummyMember();
+        Member otherTestMember = dummyMember();
+//        testTeam.addMember(testMember);
+//        testTeam.addMember(otherTestMember);
+        assertTrue(teamDao.getAllMembersByTeam(testTeam.getId()).contains(testMember));
+        assertTrue(teamDao.getAllMembersByTeam(testTeam.getId()).contains(otherTestMember));
     }
 
     // Getter Methods
@@ -76,23 +82,23 @@ public class TeamTest {
     public void getAll_getAllReturnsTeamsCorrectly_boolean() throws Exception {
         Team testTeam = setupTeam();
         Team otherTestTeam = setupTeam();
-        assertEquals(2, Team.getAll().size());
+        assertEquals(2, teamDao.getAll().size());
     }
 
     @Test
     public void getAll_getAllContainsAllTeams_boolean() throws Exception {
         Team testTeam = setupTeam();
         Team otherTestTeam = setupTeam();
-        assertTrue(Team.getAll().contains(testTeam));
-        assertTrue(Team.getAll().contains(otherTestTeam));
+        assertTrue(teamDao.getAll().contains(testTeam));
+        assertTrue(teamDao.getAll().contains(otherTestTeam));
     }
 
     @Test
     public void getAllMembers_getAllMembersReturnsMembersCorrectly_boolean() throws Exception {
         Team testTeam = setupTeam();
-        Members testMember =  dummyMember();
-        testTeam.addMember(testMember);
-        assertTrue(testTeam.getAllMembers().contains(testMember));
+        Member testMember =  dummyMember();
+//        testTeam.addMember(testMember);
+        assertTrue(teamDao.getAllMembersByTeam(testTeam.getId()).contains(testMember));
     }
 
     @Test
@@ -109,7 +115,7 @@ public class TeamTest {
 
     @Test
     public void getId_getIdReturnsTeamId_int() throws Exception {
-        Team.deleteAllTeams(); // Works without this. will continue to test.
+        teamDao.deleteAll(); // Works without this. will continue to test.
         Team testTeam = setupTeam();
         assertEquals(1, testTeam.getId());
     }
@@ -117,13 +123,13 @@ public class TeamTest {
     @Test
     public void getTeamSize_getTeamSizeReturnsNumberOfMembersInATeam_int() throws Exception {
         Team testTeam = setupTeam();
-        Members testMember = dummyMember();
-        Members otherTestMember = dummyMember();
-        Members otherOtherTestMember = dummyMember();
-        testTeam.addMember(testMember);
-        testTeam.addMember(otherTestMember);
-        testTeam.addMember(otherOtherTestMember);
-        assertEquals(3, testTeam.getTeamSize());
+        Member testMember = dummyMember();
+        Member otherTestMember = dummyMember();
+        Member otherOtherTestMember = dummyMember();
+//        testTeam.addMember(testMember);
+//        testTeam.addMember(otherTestMember);
+//        testTeam.addMember(otherOtherTestMember);
+//        assertEquals(3, testTeam.getTeamSize());
     }
 
     // Setter Methods
@@ -144,9 +150,9 @@ public class TeamTest {
     @Test
     public void addMember_addsNewMember_List() throws Exception {
         Team testTeam = setupTeam();
-        Members member = new Members("Samwise", "Gamgee", "Nothing", 22);
-        testTeam.addMember(member);
-        assertTrue(testTeam.getAllMembers().contains(member));
+        Member member = new Member("Samwise", "Gamgee", "Nothing", 22);
+//        testTeam.addMember(member);
+        assertTrue(teamDao.getAllMembersByTeam(testTeam.getId()).contains(member));
 
     }
 }

@@ -3,8 +3,8 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Members {
-    private static List<Members> listMemberInstance = new ArrayList<>();
+public class Member {
+    private static List<Member> listMemberInstance = new ArrayList<>();
     private StringBuilder stringBuilderMemberInitials = new StringBuilder();
     private String stringFirstName;
     private String stringLastName;
@@ -12,7 +12,7 @@ public class Members {
     private int intAge;
     private int id;
 
-    public Members(String stringFirstName, String stringLastName, String stringShortDesc, int intAge) {
+    public Member(String stringFirstName, String stringLastName, String stringShortDesc, int intAge) {
         this.stringFirstName = stringFirstName;
         this.stringLastName = stringLastName;
         this.stringShortDesc = stringShortDesc;
@@ -27,10 +27,10 @@ public class Members {
 
     public void deleteMember() { listMemberInstance.remove(id - 1); }
 
-    public static Members findById(int id) { return listMemberInstance.get(id - 1); }
+    public static Member findById(int id) { return listMemberInstance.get(id - 1); }
 
     // Getters
-    public static List<Members> getAll() { return listMemberInstance; }
+    public static List<Member> getAll() { return listMemberInstance; }
 
     public String getStringFirstName() { return stringFirstName; }
 

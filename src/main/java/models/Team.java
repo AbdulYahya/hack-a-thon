@@ -1,42 +1,20 @@
 package models;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 public class Team {
-    private static List<Team> listTeamInstance = new ArrayList<>();
-    private List<Members> listMembers = new ArrayList<>();
     private String stringName;
     private String stringDescription;
     private int id;
-    private int teamSize;
 
     public Team(String stringName, String stringDescription) {
         this.stringName = stringName;
         this.stringDescription = stringDescription;
-        listTeamInstance.add(this);
-        this.id = listTeamInstance.size();
-    }
-
-    public static void deleteAllTeams() {
-        listTeamInstance.clear();
-    }
-
-    public void deleteTeam() {
-        listTeamInstance.remove(id - 1);
-    }
-
-    public static Team findById(int id) {
-        return listTeamInstance.get(id - 1);
     }
 
     // Getter Methods
-    public static List<Team> getAll() {
-        return listTeamInstance;
-    }
-
-    public List<Members> getAllMembers() {
-        return listMembers;
+    public int getId() {
+        return id;
     }
 
     public String getStringName() {
@@ -47,15 +25,9 @@ public class Team {
         return stringDescription;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public int getTeamSize() {
-        return teamSize = listMembers.size();
-    }
-
     // Setter Methods
+    public void setId(int id) { this.id = id; }
+
     public void setStringName(String stringName) {
         this.stringName = stringName;
     }
@@ -64,7 +36,18 @@ public class Team {
         this.stringDescription = stringDescription;
     }
 
-    public void addMember(Members member) {
-        this.listMembers.add(member);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Team team = (Team) o;
+        return id == team.id &&
+                Objects.equals(stringName, team.stringName) &&
+                Objects.equals(stringDescription, team.stringDescription);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(stringName, stringDescription, id);
     }
 }
