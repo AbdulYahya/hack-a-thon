@@ -103,15 +103,23 @@ public class App {
             response.redirect("/teams/" + teamId);
             return new HandlebarsTemplateEngine().render(new ModelAndView(model, "team.hbs"));
         });
-
         // get: process a form to update a team member
         get("/teams/:id/m/:userId/update", (request, response) -> {
            Map<String, Object> model = new HashMap<>();
            int teamId = Integer.parseInt(request.params("id"));
-           int userId = Integer.parseInt(request.params("userId").substring(2));
+           int userId = Integer.parseInt(request.params("userId").replaceAll("[^0-9]", ""));
            model.put("team", teamDao.findById(teamId));
            model.put("members", memberDao.findById(userId));
            return new HandlebarsTemplateEngine().render(new ModelAndView(model, "index.hbs"));
+        });
+        // get: delete member
+        get("/teams/:id/m/:userId/delete", (request, response) -> {
+          Map<String, Object> model = new HashMap<>();
+          int teamId = Integer.parseInt(request.params("id"));
+          int userId = Integer.parseInt(request.params("userId").replaceAll("[^0-9]", ""));
+          memberDao.deleteById(memberDao.findById(userId).getId());
+          response.redirect("/teams/" + teamId);
+          return new HandlebarsTemplateEngine().render(new ModelAndView(model, "team.hbs"));
         });
     }
 }
