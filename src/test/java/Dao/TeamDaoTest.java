@@ -42,7 +42,14 @@ public class TeamDaoTest {
     }
 
     @Test
-    public void getAll() {
+    public void getAll_returnsAllTeams() throws Exception {
+        Team team = setupNew();
+        Team otherTeam = setupNew();
+        teamDao.add(team);
+        teamDao.add(otherTeam);
+        assertEquals(2, teamDao.getAll().size());
+        assertTrue(teamDao.getAll().contains(team));
+        assertTrue(teamDao.getAll().contains(otherTeam));
     }
 
     @Test
