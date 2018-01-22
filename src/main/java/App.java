@@ -42,6 +42,7 @@ public class App {
         // get: delete all teams
         get("/teams/delete", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
+            memberDao.deleteAll();
             teamDao.deleteAll();
             response.redirect("/teams");
             return new HandlebarsTemplateEngine().render(new ModelAndView(model, "teams.hbs"));
