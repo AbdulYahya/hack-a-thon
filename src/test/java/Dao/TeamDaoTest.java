@@ -15,7 +15,7 @@ public class TeamDaoTest {
     private MemberDao memberDao;
     private Connection con;
 
-    public Team setupNew() {
+    private Team setupNew() {
         return new Team("Test", "Test Description");
     }
 
