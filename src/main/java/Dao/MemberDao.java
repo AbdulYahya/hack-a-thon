@@ -56,7 +56,7 @@ public class MemberDao implements iMemberDao {
 
     @Override
     public void update(int id, String firstName, String lastName, String description, int age, int teamId) {
-        String sql = "UPDATE members SET firstName = :firstName, lastName = :lastName, description = :description, age = :age, teamId = :teamId";
+        String sql = "UPDATE members SET firstName = :firstName, lastName = :lastName, description = :description, age = :age, teamId = :teamId WHERE id = :id";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("firstName", firstName)
@@ -64,6 +64,7 @@ public class MemberDao implements iMemberDao {
                     .addParameter("description", description)
                     .addParameter("age", age)
                     .addParameter("teamId", teamId)
+                    .addParameter("id", id)
                     .executeUpdate();
         } catch (Sql2oException ex) {
             System.out.println(ex);
