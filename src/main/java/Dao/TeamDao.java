@@ -17,7 +17,7 @@ public class TeamDao implements iTeamDao {
 
     @Override
     public void add(Team team) {
-        String sql = "INSERT INTO teams (name) VALUES (:name)";
+        String sql = "INSERT INTO teams (name, description) VALUES (:name, :description)";
         try (Connection con = sql2o.open()) {
             int id = (int) con.createQuery(sql)
                     .bind(team)
@@ -31,7 +31,10 @@ public class TeamDao implements iTeamDao {
 
     @Override
     public List<Team> getAll() {
-        return null;
+        try (Connection con = sql2o.open()) {
+            return con.createQuery("SELECT * FROM teams")
+                    .executeAndFetch(Team.class);
+        }
     }
 
     @Override
