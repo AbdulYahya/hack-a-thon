@@ -119,6 +119,21 @@ public class App {
            model.put("members", memberDao.findById(userId));
            return new HandlebarsTemplateEngine().render(new ModelAndView(model, "index.hbs"));
         });
+        // post: process form to update a team member
+        post("/teams/:id/m/:userId/update", (request, response) -> {
+           Map<String, Object> model = new HashMap<>();
+           int teamId = Integer.parseInt(request.params("id"));
+           int userId = Integer.parseInt(request.params("userId").replaceAll("[^0-9]", ""));
+           String memberFirstName = request.queryParams("memberFirstName");
+           String memberLastName = request.queryParams("memberLastName");
+           String memberDesc = request.queryParams("memberDesc");
+           int memberAge = Integer.parseInt(request.queryParams("memberAge"));
+           memberDao.update(userId, memberFirstName, memberLastName, memberDesc, memberAge, teamId);
+           model.put("team", teamDao.findById(teamId));
+           model.put("member", memberDao.findById(userId));
+           response.redirect("/teams/" + teamId + "/m/" + memberDao.findById(userId).getFirstName() + userId);
+           return new HandlebarsTemplateEngine().render(new ModelAndView(model, "member.hbs"));
+        });
         // get: delete a team
         get("/teams/:id/delete", (request, response) -> {
            Map<String, Object> model = new HashMap<>();
