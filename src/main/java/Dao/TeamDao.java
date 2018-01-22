@@ -17,7 +17,18 @@ public class TeamDao implements iTeamDao {
 
     @Override
     public void add(Team team) {
-
+        String sql = "INSERT INTO teams (name) VALUES (:name)";
+        try (Connection con = sql2o.open()) {
+            int id = (int) con.createQuery(sql)
+                    .addParameter("name", team.getName())
+                    .addColumnMapping("NAME", "name")
+                    .addColumnMapping("DESCRIPTION", "description")
+                    .executeUpdate()
+                    .getKey();
+            team.setId(id);
+        } catch (Sql2oException ex) {
+            System.out.println(ex);
+        }
     }
 
     @Override

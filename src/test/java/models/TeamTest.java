@@ -104,13 +104,13 @@ public class TeamTest {
     @Test
     public void getStringName_getStringNameReturnsName_String() throws Exception {
         Team testTeam = setupTeam();
-        assertEquals("NeverBrokeAgain", testTeam.getStringName());
+        assertEquals("NeverBrokeAgain", testTeam.getName());
     }
 
     @Test
     public void getStringDescription_getStringDescriptionReturnsDesc_String() throws Exception {
         Team testTeam = setupTeam();
-        assertEquals("Young NBA", testTeam.getStringDescription());
+        assertEquals("Young NBA", testTeam.getDescription());
     }
 
     @Test
@@ -136,15 +136,15 @@ public class TeamTest {
     @Test
     public void setStringName_setsNewStringName_string() throws Exception {
         Team testTeam = setupTeam();
-        testTeam.setStringName("Young Test");
-        assertEquals("Young Test", testTeam.getStringName());
+        testTeam.setName("Young Test");
+        assertEquals("Young Test", testTeam.getName());
     }
 
     @Test
     public void setStringDescription_setsNewStringDescription_string() throws Exception {
         Team testTeam = setupTeam();
-        testTeam.setStringDescription("Nothing");
-        assertEquals("Nothing", testTeam.getStringDescription());
+        testTeam.setDescription("Nothing");
+        assertEquals("Nothing", testTeam.getDescription());
     }
 
     @Test

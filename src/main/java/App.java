@@ -99,8 +99,8 @@ public class App {
             Team updateTeam = teamDao.findById(teamId);
             String teamName = request.queryParams("teamName");
             String teamDesc = request.queryParams("teamDesc");
-            updateTeam.setStringName(teamName);
-            updateTeam.setStringDescription(teamDesc);
+            updateTeam.setName(teamName);
+            updateTeam.setDescription(teamDesc);
             model.put("team", updateTeam);
             model.put("members", teamDao.getAllMembersByTeam(teamId));
             response.redirect("/teams/" + teamId);
